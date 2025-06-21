@@ -19,116 +19,140 @@
 
 {{ if .IsPage }}
     {{ $defaultCdnJsSite := "cdnjs.cloudflare.com" }}
-    <!-- graphviz -->
-    {{- if and (or .Params.graphviz.enable (and .Site.Params.graphviz.enable (ne .Params.graphviz.enable false))) (or .IsPage .IsHome) -}}
-        <script type="text/javascript" src="//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/viz.js/1.7.1/viz.js"></script>
-        <script type="text/javascript">
-            (function () {
+    
+    <!-- Load visualization scripts only when needed -->
+    {{ $hasGraphviz := and (or .Params.graphviz.enable (and .Site.Params.graphviz.enable (ne .Params.graphviz.enable false))) (or .IsPage .IsHome) }}
+    {{ $hasFlowchart := and (or .Params.flowchartDiagrams.enable (and .Site.Params.flowchartDiagrams.enable (ne .Params.flowchartDiagrams.enable false))) (or .IsPage .IsHome) }}
+    {{ $hasSequence := and (or .Params.sequenceDiagrams.enable (and .Site.Params.sequenceDiagrams.enable (ne .Params.sequenceDiagrams.enable false))) (or .IsPage .IsHome) }}
+    
+    {{ if or $hasGraphviz $hasFlowchart $hasSequence }}
+    <!-- Common visualization scripts -->
+    <script>
+        // Helper function to load scripts
+        function loadScript(src, callback) {
+            const script = document.createElement('script');
+            script.src = src;
+            script.async = true;
+            if (callback) script.onload = callback;
+            document.head.appendChild(script);
+        }
+    </script>
+    
+    <!-- Graphviz -->
+    {{ if $hasGraphviz }}
+        <script>
+            loadScript('//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/viz.js/1.7.1/viz.js', function() {
                 if (!window.Viz) return;
-                var vizPrefix = "language-viz-";
-                var i = 0;
+                const vizPrefix = "language-viz-";
                 Array.prototype.forEach.call(document.querySelectorAll("code[class^=" + vizPrefix + "]"), function (block) {
-                    var engine;
+                    let engine;
                     block.getAttribute("class").split(" ").forEach(function (cls) {
                         if (cls.startsWith(vizPrefix)) {
                             engine = cls.substr(vizPrefix.length);
                         }
                     });
                     const rootElement = block.parentNode;
-                    var image = new DOMParser().parseFromString(Viz(block.innerText, { format: "svg", engine: engine }), "image/svg+xml");
+                    const image = new DOMParser().parseFromString(Viz(block.innerText, { format: "svg", engine: engine }), "image/svg+xml");
                     const container = document.createElement('div');
                     container.className = 'align-center';
                     container.setAttribute("style", "overFlow-x:auto");
                     container.appendChild(image.documentElement);
                     rootElement.parentNode.replaceChild(container, rootElement);
                 });
-            })();
+            });
         </script>
-    {{- end -}}
+    {{ end }}
 
-    <!-- flowchart -->
-    {{- if and (or .Params.flowchartDiagrams.enable (and .Site.Params.flowchartDiagrams.enable (ne .Params.flowchartDiagrams.enable false))) (or .IsPage .IsHome) -}}
-        <script src="//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/raphael/2.2.8/raphael.min.js" crossorigin="anonymous"></script>
-        <script src="//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/flowchart/1.12.2/flowchart.min.js" crossorigin="anonymous"></script>
+    <!-- Flowchart -->
+    {{ if $hasFlowchart }}
         <script>
-            {{- if .Params.flowchartDiagrams.options -}}
-                window.flowchartDiagramsOptions = {{ .Params.flowchartDiagrams.options | safeJS }};
-            {{- else if .Site.Params.flowchartDiagrams.options -}}
-                window.flowchartDiagramsOptions = {{ .Site.Params.flowchartDiagrams.options | safeJS }};
-            {{- end -}}
-            (function () {
-                if (!window.flowchart) return;
-                const blocks = document.querySelectorAll('pre code.language-flowchart, pre code.language-flow');
-                for (let i = 0; i < blocks.length; i++) {
-                    const block = blocks[i];
-                    const rootElement = block.parentNode;
-                    const container = document.createElement('div');
-                    const id = `js-flowchart-diagrams-${i}`;
-                    container.id = id;
-                    container.className = 'align-center';
-                    container.setAttribute("style", "overFlow-x:auto");
-                    rootElement.parentNode.replaceChild(container, rootElement);
-                    const diagram = flowchart.parse(block.childNodes[0].nodeValue);
-                    diagram.drawSVG(id, window.flowchartDiagramsOptions ? window.flowchartDiagramsOptions : {});
-                }
-            })();
+            loadScript('//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/raphael/2.2.8/raphael.min.js', function() {
+                loadScript('//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/flowchart/1.12.2/flowchart.min.js', function() {
+                    {{ if .Params.flowchartDiagrams.options }}
+                        window.flowchartDiagramsOptions = {{ .Params.flowchartDiagrams.options | safeJS }};
+                    {{ else if .Site.Params.flowchartDiagrams.options }}
+                        window.flowchartDiagramsOptions = {{ .Site.Params.flowchartDiagrams.options | safeJS }};
+                    {{ end }}
+                    
+                    if (!window.flowchart) return;
+                    const blocks = document.querySelectorAll('pre code.language-flowchart, pre code.language-flow');
+                    for (let i = 0; i < blocks.length; i++) {
+                        const block = blocks[i];
+                        const rootElement = block.parentNode;
+                        const container = document.createElement('div');
+                        const id = `js-flowchart-diagrams-${i}`;
+                        container.id = id;
+                        container.className = 'align-center';
+                        container.setAttribute("style", "overFlow-x:auto");
+                        rootElement.parentNode.replaceChild(container, rootElement);
+                        const diagram = flowchart.parse(block.childNodes[0].nodeValue);
+                        diagram.drawSVG(id, window.flowchartDiagramsOptions ? window.flowchartDiagramsOptions : {});
+                    }
+                });
+            });
         </script>
-    {{- end -}}
+    {{ end }}
     
-    <!-- sequence必须要在flow加载之后，否则sequence渲染不成功，原因待分析 -->
-    <!-- js-sequence-diagrams -->
-    {{- if and (or .Params.sequenceDiagrams.enable (and .Site.Params.sequenceDiagrams.enable (ne .Params.sequenceDiagrams.enable false))) (or .IsPage .IsHome) -}}
-        <script src="//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/webfont/1.6.28/webfontloader.js" crossorigin="anonymous"></script>
-        <script src="//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/snap.svg/0.5.1/snap.svg-min.js" crossorigin="anonymous"></script>
-        <script src="//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/underscore.js/1.9.1/underscore-min.js" crossorigin="anonymous"></script>
-        <script src="//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js" crossorigin="anonymous"></script>
+    <!-- Sequence Diagrams -->
+    {{ if $hasSequence }}
         <script>
-        {{- if .Params.sequenceDiagrams.options -}}
-            window.sequenceDiagramsOptions = {{ .Params.sequenceDiagrams.options | safeJS }};
-        {{- else if .Site.Params.sequenceDiagrams.options -}}
-            window.sequenceDiagramsOptions = {{ .Site.Params.sequenceDiagrams.options | safeJS }};
-        {{- end -}}
-        (function () {
-            if (!window.Diagram) return;
-            const blocks = document.querySelectorAll('pre code.language-sequence');
-            for (let i = 0; i < blocks.length; i++) {
-                const block = blocks[i];
-                // const rootElement = window.Prism.plugins.lineNumbers ? (window.Prism.plugins.toolbar ? block.parentElement.parentElement : block.parentElement) : block;
-                const rootElement = block.parentNode;
-                const container = document.createElement('div');
-                const id = `js-sequence-diag-${i}`;
-                container.id = id;
-                container.className = 'align-center';
-                container.setAttribute("style", "overFlow-x:auto");
-                rootElement.parentNode.replaceChild(container, rootElement);
-
-                const diagram = Diagram.parse(block.childNodes[0].nodeValue);
-                diagram.drawSVG(id, window.sequenceDiagramsOptions
-                    ? window.sequenceDiagramsOptions
-                    : { theme: 'simple' });
-            }
-        })();
+            // Load sequence diagram dependencies in order
+            loadScript('//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/webfont/1.6.28/webfontloader.js', function() {
+                loadScript('//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/snap.svg/0.5.1/snap.svg-min.js', function() {
+                    loadScript('//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/underscore.js/1.9.1/underscore-min.js', function() {
+                        loadScript('//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js', function() {
+                            {{ if .Params.sequenceDiagrams.options }}
+                                window.sequenceDiagramsOptions = {{ .Params.sequenceDiagrams.options | safeJS }};
+                            {{ else if .Site.Params.sequenceDiagrams.options }}
+                                window.sequenceDiagramsOptions = {{ .Site.Params.sequenceDiagrams.options | safeJS }};
+                            {{ end }}
+                            
+                            if (!window.Diagram) return;
+                            const blocks = document.querySelectorAll('pre code.language-sequence');
+                            for (let i = 0; i < blocks.length; i++) {
+                                const block = blocks[i];
+                                const rootElement = block.parentNode;
+                                const container = document.createElement('div');
+                                const id = `js-sequence-diag-${i}`;
+                                container.id = id;
+                                container.className = 'align-center';
+                                container.setAttribute("style", "overFlow-x:auto");
+                                rootElement.parentNode.replaceChild(container, rootElement);
+                                
+                                const diagram = Diagram.parse(block.childNodes[0].nodeValue);
+                                diagram.drawSVG(id, window.sequenceDiagramsOptions
+                                    ? window.sequenceDiagramsOptions
+                                    : { theme: 'simple' });
+                            }
+                        });
+                    });
+                });
+            });
         </script>
-    {{- end -}}
+    {{ end }}
+    {{ end }}
     
+    <!-- MathJax -->
     <script type="text/javascript">
         window.MathJax = {
             tex2jax: {
                 inlineMath: [['$', '$']],
                 processEscapes: true
-                }
-            };
+            }
+        };
     </script>
     <script src='//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
     
-    {{- if .Site.Params.fancybox -}}
-        <script src="//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-    {{- end -}}
+    <!-- Fancybox -->
+    {{ if .Site.Params.fancybox }}
+        {{ $fancyboxJS := resources.Get "js/vanilla-fancybox.js" | minify }}
+        <script type="text/javascript" src="{{ $fancyboxJS.RelPermalink }}" async></script>
+    {{ end }}
 {{ end }}
 
 <a id="rocket" href="#top"></a>
 {{ $totopJS := resources.Get "js/totop.js" | minify }}
-<script type="text/javascript" src="{{ $totopJS.RelPermalink }}" async=""></script>
+<script type="text/javascript" src="{{ $totopJS.RelPermalink }}" async></script>
 
 {{ template "_internal/google_analytics.html" . }}
 

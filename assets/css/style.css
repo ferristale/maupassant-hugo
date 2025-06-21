@@ -22,6 +22,7 @@
     --theme-shadow: rgba(0, 0, 0, 0.1);
 }
 
+/* Dark theme variables */
 [data-theme="dark"] {
     --theme-bg: #1d1d1d;
     --theme-color: #e4e4e4;
@@ -169,11 +170,7 @@ body {
     background-color: var(--theme-bg);
     color: var(--theme-color);
     font-size: 15px;
-    /**
-    font-family:"TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
-    **/
     font-family: "Iowan Old Style", "Ovo", "Hoefler Text", Georgia, "Times New Roman", "TIBch", "Source Han Sans", "PingFangSC-Regular", "Hiragino Sans GB", "STHeiti", "Microsoft Yahei", "Droid Sans Fallback", "WenQuanYi Micro Hei", sans-serif;
-    /**-webkit-font-smoothing: antialiased;**/
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -186,10 +183,7 @@ img{
 a, button.submit {
     color: var(--theme-muted-color);
     text-decoration:none;
-    -webkit-transition:all .1s ease-in;
-    -moz-transition:all .1s ease-in;
-    -o-transition:all .1s ease-in;
-    transition:all .1s ease-in;
+    transition: all .1s ease-in;
 }
 a:hover, a:active {
     color: var(--theme-muted-color);
@@ -308,9 +302,6 @@ textarea {
     margin:0;
 }
 #logo {
-    /**
-    font:bold 42px/1.12 "Times New Roman", Georgia, Times, sans-serif;
-    **/
     font-size: 37.5px;
     font-weight: bold;
     color: #555;
@@ -457,7 +448,6 @@ textarea {
     margin:0;
     color: #555;
     text-align:left;
-    /**font:bold 25px/1.1 "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;**/
     font-size: 1.5em;
     font-weight: bold;
 }
@@ -986,7 +976,6 @@ img.alignright {
 .body404{
     height: 100%;
     width: 100%;
-    /*background:#fff url(img/404.jpg) no-repeat center top;*/
     background: #fff;
     background-size: cover;
     margin: 4em 0 6em 0;
@@ -1494,7 +1483,6 @@ table tbody tr td:nth-of-type(1) pre {
   color: #fff; 
 }
 .github-badge img {
-  /*height: "calc(%s * 1.25)" % $fontsize-footnote*/
   height: 1.25em;
   vertical-align: top; 
 }

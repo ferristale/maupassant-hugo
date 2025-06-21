@@ -1,8 +1,9 @@
 <head>
-    <!-- Prevent flash of incorrect theme -->
+    <!-- Prevent flash of incorrect theme by applying user preference immediately -->
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
+            // Apply user preference immediately if available
             if (savedTheme) {
                 document.documentElement.setAttribute('data-theme', savedTheme);
             } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -69,16 +70,11 @@
     {{ range .AlternativeOutputFormats -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
-    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
     {{ $themeJS := resources.Get "js/theme-switch.js" | minify | fingerprint "sha256" }}
     <script type="text/javascript" src="{{ $themeJS.RelPermalink }}" defer></script>
 
     {{ if .Site.Params.googleAd }}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ .Site.Params.googleAd }}" crossorigin="anonymous"></script>
-    {{ end }}
-    
-    {{if .Site.Params.fancybox }}
-        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
     {{ end }}
 </head>
