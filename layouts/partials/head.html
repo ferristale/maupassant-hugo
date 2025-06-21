@@ -50,8 +50,8 @@
         {{ $cssSlice = $cssSlice | append $customCSS }}
     {{ end }}
     
-    {{ $bundled := $cssSlice | resources.Concat "css/bundle.css" | minify }}
-    <link rel="stylesheet" href="{{ $bundled.RelPermalink }}">
+    {{ $bundled := $cssSlice | resources.Concat "css/bundle.css" | minify | fingerprint "sha256" }}
+    <link rel="stylesheet" href="{{ $bundled.RelPermalink }}" integrity="{{ $bundled.Data.Integrity }}" crossorigin="anonymous">
     
     {{ range .AlternativeOutputFormats -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}

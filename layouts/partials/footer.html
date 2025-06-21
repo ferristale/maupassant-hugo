@@ -142,6 +142,6 @@
 
 <!-- custom js -->
 {{ range .Site.Params.customJS }}
-    {{ $customJS := resources.Get (printf "js/%s" .) | minify }}
-    <script src="{{ $customJS.RelPermalink }}"></script>
+    {{ $customJS := resources.Get (printf "js/%s" .) | minify | fingerprint "sha256" }}
+    <script src="{{ $customJS.RelPermalink }}" integrity="{{ $customJS.Data.Integrity }}" crossorigin="anonymous"></script>
 {{ end }}
