@@ -145,8 +145,10 @@
     
     <!-- Fancybox -->
     {{ if .Site.Params.fancybox }}
-        {{ $fancyboxJS := resources.Get "js/vanilla-fancybox.js" | minify }}
-        <script type="text/javascript" src="{{ $fancyboxJS.RelPermalink }}" async></script>
+        {{ $fancyboxJS := resources.GetRemote "https://cdn.jsdelivr.net/npm/@fancyapps/ui@6/dist/fancybox/fancybox.umd.min.js" | minify | fingerprint "sha256" }}
+        <script type="text/javascript" src="{{ $fancyboxJS.RelPermalink }}" integrity="{{ $fancyboxJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        {{ $fancyboxInit := resources.Get "js/fancybox-init.js" | minify | fingerprint "sha256" }}
+        <script type="text/javascript" src="{{ $fancyboxInit.RelPermalink }}" integrity="{{ $fancyboxInit.Data.Integrity }}" crossorigin="anonymous" defer></script>
     {{ end }}
 {{ end }}
 

@@ -10,7 +10,7 @@
 {{- if .Title -}}
 <figure class="max-w-2xl mx-auto overflow-hidden">
     {{if .Page.Site.Params.fancybox }}
-    <a data-fancybox="gallery" href="{{ $img_destination | safeURL }}">
+    <a data-fancybox="gallery" data-caption="{{ $.Title | safeHTML }}" href="{{ $img_destination | safeURL }}">
         <img alt="{{ $.Text }}" src="{{ $img_destination | safeURL }}" />
     </a>
     {{ else }}

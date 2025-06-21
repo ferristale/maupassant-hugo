@@ -1,0 +1,29 @@
+/* Custom Fancybox styling */
+.fancybox__toolbar {
+  --f-button-color: #666;
+  --f-button-hover-color: #333;
+}
+
+.fancybox__container {
+  --fancybox-bg: rgba(24, 24, 27, 0.93);
+}
+
+/* Light theme overrides */
+html[data-theme="light"] .fancybox__container {
+  --fancybox-bg: rgba(255, 255, 255, 0.95);
+  --f-button-bg: rgba(0, 0, 0, 0.07);
+  color: #333;
+}
+
+/* Dark theme overrides */
+html[data-theme="dark"] .fancybox__container {
+  --fancybox-bg: rgba(0, 0, 0, 0.95);
+  --f-button-bg: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.fancybox__caption {
+  font-size: 14px;
+  padding: 10px 0;
+  text-align: center;
+} 

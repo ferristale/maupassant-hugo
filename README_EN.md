@@ -258,6 +258,15 @@ hiddenFromHomePage = false
   ​```
   ```
 
+#### Image Gallery
+
+Uses Fancybox v6 to enable image gallery functionality.
+
+```toml
+[params]
+  fancybox = true
+```
+
 ## Contributing
 
 All kinds of contributions (enhancements, new features, documentation & code improvements, issues & bugs reporting) are welcome.

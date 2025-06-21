@@ -64,6 +64,12 @@
         {{ $cssSlice = $cssSlice | append $customCSS }}
     {{ end }}
     
+    {{ if .Site.Params.fancybox }}
+        {{ $fancyboxCSS := resources.GetRemote "https://cdn.jsdelivr.net/npm/@fancyapps/ui@6/dist/fancybox/fancybox.min.css" }}
+        {{ $fancyboxCustomCSS := resources.Get "css/fancybox-custom.css" }}
+        {{ $cssSlice = $cssSlice | append $fancyboxCSS | append $fancyboxCustomCSS }}
+    {{ end }}
+    
     {{ $bundled := $cssSlice | resources.Concat "css/bundle.css" | minify | fingerprint "sha256" }}
     <link rel="stylesheet" href="{{ $bundled.RelPermalink }}" integrity="{{ $bundled.Data.Integrity }}" crossorigin="anonymous">
     

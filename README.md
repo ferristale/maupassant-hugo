@@ -192,7 +192,7 @@ type: archives
 
 #### 图片点击放大
 
-将会引入jquery.js 和 fancybox 的css和js
+使用 Fancybox v6 实现图片点击放大功能。
 
 ```toml
 [params]
