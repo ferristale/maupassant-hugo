@@ -41,10 +41,17 @@
     <link rel="icon" href='{{ "favicon.png" | relURL }}' type="image/png">
     <link rel="alternate icon" href='{{ "favicon.png" | relURL }}' type="image/svg+xml">
 
-    {{ $normalize := resources.Get "css/normalize.css" | minify }}
-    {{ $style := resources.Get "css/style.css" | minify }}
-    <link rel="stylesheet" href="{{ $normalize.RelPermalink }}">
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+    {{ $normalize := resources.Get "css/normalize.css" }}
+    {{ $style := resources.Get "css/style.css" }}
+    {{ $cssSlice := slice $normalize $style }}
+    
+    {{ range .Site.Params.customCSS }}
+        {{ $customCSS := resources.Get (printf "css/%s" .) }}
+        {{ $cssSlice = $cssSlice | append $customCSS }}
+    {{ end }}
+    
+    {{ $bundled := $cssSlice | resources.Concat "css/bundle.css" | minify }}
+    <link rel="stylesheet" href="{{ $bundled.RelPermalink }}">
     
     {{ range .AlternativeOutputFormats -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
@@ -57,11 +64,5 @@
     
     {{if .Site.Params.fancybox }}
         <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
-    {{ end }}
-    
-    <!-- custom css -->
-    {{ range .Site.Params.customCSS }}
-        {{ $customCSS := resources.Get (printf "css/%s" .) | minify }}
-        <link rel="stylesheet" href="{{ $customCSS.RelPermalink }}">
     {{ end }}
 </head>
