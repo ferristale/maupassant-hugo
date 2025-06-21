@@ -7,7 +7,7 @@
       <script src="https://utteranc.es/client.js"
             repo= "{{ .Site.Params.utteranc.repo }}"
             issue-term="{{ .Site.Params.utteranc.issueTerm }}"
-            theme="github-light"
+            theme="{{ if (eq .Site.Params.defaultTheme `dark`) }}github-dark{{ else }}github-light{{ end }}"
             crossorigin="anonymous"
             async>
       </script>
@@ -38,6 +38,9 @@
         document.addEventListener('DOMContentLoaded', function() {
           // Wait a bit for utterances to load
           setTimeout(updateUtterancesTheme, 1000);
+          
+          // Try again after a longer delay if the frame wasn't found
+          setTimeout(updateUtterancesTheme, 3000);
         });
         
         // Listen for theme changes
