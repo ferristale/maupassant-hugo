@@ -193,7 +193,7 @@ mark {
     background: #fffdd1;
 }
 pre {
-    font-family: "Ubuntu Mono", monospace;
+    font-family:Menlo, Monaco, Consolas, "Lucida Console", "Courier New", monospace;
     overflow:auto;
     border: 1px solid var(--theme-border);
     background: var(--theme-code-bg);
@@ -330,9 +330,6 @@ textarea {
 #search input {
     padding: 1em 2em .75em 1em;
     line-height: 1.5;
-    background: #fff;
-    color: #444;
-    border: 1px solid #ddd;
 }
 #search button {
     position:absolute;
@@ -346,26 +343,6 @@ textarea {
     height:48px;
     color:#444;
     background:none;
-}
-/* Dark theme search styles */
-[data-theme="dark"] #search input {
-    background: #2a2a2a;
-    color: #bbb;
-    border: 1px solid #404040;
-}
-[data-theme="dark"] #search button {
-    color: #bbb;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) #search input {
-        background: #2a2a2a;
-        color: #bbb;
-        border: 1px solid #404040;
-    }
-    :root:not([data-theme="light"]) #search button {
-        color: #bbb;
-    }
 }
 .col-8 {
     width:800px;
@@ -553,11 +530,11 @@ textarea {
     border:1px solid #DDD;
 }
 .page-navigator a:hover {
-    background:#F8F8F8;
+    background: var(--theme-secondary-bg);
     border-bottom-color:#D26911;
 }
 .page-navigator .current a {
-    background:#F8F8F8;
+    background: var(--theme-secondary-bg);
     border-bottom-color:#D26911;
 }
 .comment-list, .comment-list ol {
@@ -1050,7 +1027,10 @@ img.alignright {
       color: #444;
 }
 .post-archive a {
-    color: #0789e0;
+    color: var(--theme-muted-color);
+}
+.post-archive a:hover {
+    color: var(--theme-color);
 }
 
 /* Dark theme specific styles for post-archive */
@@ -1060,9 +1040,6 @@ img.alignright {
 [data-theme="dark"] .post-archive h2 {
     color: #bbb;
 }
-[data-theme="dark"] .post-archive a {
-    color: #4dabf7;
-}
 
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .post-archive {
@@ -1070,9 +1047,6 @@ img.alignright {
     }
     :root:not([data-theme="light"]) .post-archive h2 {
         color: #bbb;
-    }
-    :root:not([data-theme="light"]) .post-archive a {
-        color: #4dabf7;
     }
 }
 .post-archive .date {
@@ -1142,7 +1116,7 @@ img.alignright {
 /* read more*/
 .readmore a {
     font-size: 14px;
-    color: var(--theme-color);
+    color: var(--theme-muted-color);
     margin: -10px 0;
     padding: 5px 10px;
     border: 1px solid var(--theme-border);
@@ -1151,7 +1125,8 @@ img.alignright {
 }
 .readmore a:hover {
     background: var(--theme-secondary-bg);
-    border-bottom-color: #D26911; 
+    border-bottom-color: #D26911;
+    color: var(--theme-color);
 }
 /* 版权声明 */
 .post-copyright {
@@ -1163,8 +1138,11 @@ img.alignright {
     list-style: none;
 }
 .post-copyright a {
-    color: #0789e0;
-    border-bottom: 1px solid #ddd;
+    color: var(--theme-muted-color);
+    border-bottom: 1px solid var(--theme-border);
+}
+.post-copyright a:hover {
+    color: var(--theme-color);
 }
 
 /* Dark theme specific styles */
@@ -1172,19 +1150,11 @@ img.alignright {
     background-color: #2a2a2a;
     color: #bbb;
 }
-[data-theme="dark"] .post-copyright a {
-    color: #4dabf7;
-    border-bottom: 1px solid #404040;
-}
 
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .post-copyright {
         background-color: #2a2a2a;
         color: #bbb;
-    }
-    :root:not([data-theme="light"]) .post-copyright a {
-        color: #4dabf7;
-        border-bottom: 1px solid #404040;
     }
 }
 
