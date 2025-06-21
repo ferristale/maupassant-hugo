@@ -193,7 +193,7 @@ mark {
     background: #fffdd1;
 }
 pre {
-    font-family:Menlo, Monaco, Consolas, "Lucida Console", "Courier New", monospace;
+    font-family: "Ubuntu Mono", monospace;
     overflow:auto;
     border: 1px solid var(--theme-border);
     background: var(--theme-code-bg);

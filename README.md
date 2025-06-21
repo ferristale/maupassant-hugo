@@ -63,25 +63,6 @@ theme = "maupassant"
 
 在主题的 [exampleSite](exampleSite/) 示例目录下有`config.toml `文件，把`config.toml `文件复制到你的站点目录下，然后根据自己的需求修改即可
 
-#### 代码高亮
-
-从Hugo v0.60.0开始，默认使用`Goldmark`渲染MD文件，并且默认开启了代码高亮，所以该主题原来的代码高亮兼容出现问题，
-经过取舍，最终还是选用了Hugo原生的代码高亮方式，去掉了原来主题自带的基于JS的代码高亮。
-
-新的Hugo内置的代码高亮使用非常代码，默认不用任何配置就可以，如果你需要开启行号、或者更换代码样式，可以参考如下配置：
-
-*config.toml*
-```toml
-[markup]
-  [markup.highlight]
-    lineNos = true
-    style = "github"
-```
-
-更多配合和样式参考:
-
-[Configure Markup](https://gohugo.io/getting-started/configuration-markup)
-[Syntax Highlighting](https://gohugo.io/content-management/syntax-highlighting/)
 
 #### 自定义菜单
 
