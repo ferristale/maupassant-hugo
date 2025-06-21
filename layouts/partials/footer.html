@@ -129,7 +129,8 @@
 {{ end }}
 
 <a id="rocket" href="#top"></a>
-<script type="text/javascript" src='{{ "js/totop.js?v=0.0.0" | relURL }}' async=""></script>
+{{ $totopJS := resources.Get "js/totop.js" | minify }}
+<script type="text/javascript" src="{{ $totopJS.RelPermalink }}" async=""></script>
 
 {{ template "_internal/google_analytics.html" . }}
 
@@ -141,5 +142,6 @@
 
 <!-- custom js -->
 {{ range .Site.Params.customJS }}
-    <script src='{{ "/js/" | relURL }}{{ . }}'></script>
+    {{ $customJS := resources.Get (printf "js/%s" .) | minify }}
+    <script src="{{ $customJS.RelPermalink }}"></script>
 {{ end }}

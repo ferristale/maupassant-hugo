@@ -41,8 +41,11 @@
     <link rel="icon" href='{{ "favicon.png" | relURL }}' type="image/png">
     <link rel="alternate icon" href='{{ "favicon.png" | relURL }}' type="image/svg+xml">
 
-    <link rel="stylesheet" href='{{ "css/normalize.css" | relURL}}'>
-    <link rel="stylesheet" href='{{ "css/style.css" | relURL }}'>
+    {{ $normalize := resources.Get "css/normalize.css" | minify }}
+    {{ $style := resources.Get "css/style.css" | minify }}
+    <link rel="stylesheet" href="{{ $normalize.RelPermalink }}">
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+    
     {{ range .AlternativeOutputFormats -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
@@ -58,6 +61,7 @@
     
     <!-- custom css -->
     {{ range .Site.Params.customCSS }}
-        <link rel="stylesheet" href='{{ "/css/" | relURL }}{{ . }}'>
+        {{ $customCSS := resources.Get (printf "css/%s" .) | minify }}
+        <link rel="stylesheet" href="{{ $customCSS.RelPermalink }}">
     {{ end }}
 </head>
