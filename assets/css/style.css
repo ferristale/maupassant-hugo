@@ -79,6 +79,9 @@
 .theme-toggle .icon-sun,
 .theme-toggle .icon-moon {
     display: none;
+    font-size: 16px;
+    filter: grayscale(1);
+    color: var(--theme-color);
 }
 
 [data-theme="light"] .theme-toggle .icon-sun,
@@ -330,6 +333,13 @@ textarea {
 #search input {
     padding: 1em 2em .75em 1em;
     line-height: 1.5;
+    color: var(--theme-color);
+    background: var(--theme-bg);
+    border: 1px solid var(--theme-border);
+}
+#search input::placeholder {
+    color: var(--theme-muted-color);
+    opacity: 1;
 }
 #search button {
     position:absolute;
@@ -341,7 +351,7 @@ textarea {
     padding:14px 0;
     width:auto;
     height:48px;
-    color:#444;
+    color: var(--theme-color);
     background:none;
 }
 .col-8 {
