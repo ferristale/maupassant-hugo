@@ -3,6 +3,18 @@
  * Automatically detects browser dark/light preference and allows manual toggling
  */
 
+// Immediately set a default theme to prevent flash
+(function() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+})();
+
 (function() {
     'use strict';
 
@@ -83,7 +95,10 @@
         }
     }
 
-    // Initialize immediately
-    init();
+    // Initialize after the immediate theme setting
+    document.addEventListener('DOMContentLoaded', function() {
+        createToggleButton();
+        setupMediaQueryListener();
+    });
 
 })(); 
