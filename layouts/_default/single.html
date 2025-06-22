@@ -24,21 +24,18 @@
             {{ .Content }}
         </div>
 
+        <!-- Tags moved here with new hashtag format -->
+        {{ if and (isset .Params "tags") .Params.tags }}
+        <div class="post-tags">
+            {{ range .Params.Tags }}
+            <a href='{{ "tags/" | relURL }}{{ . | urlize }}' class="tag-link">#{{ . }}</a>
+            {{ end }}
+        </div>
+        {{ end }}
+
         {{ partial "copyright" .}}
 
         {{ partial "related" . }}
-
-        <div class="post-meta meta-tags">
-            {{ if and (isset .Params "tags") .Params.tags }}
-            <ul class="clearfix">
-                {{ range .Params.Tags }}
-                <li><a href='{{ "tags/" | relURL }}{{ . | urlize }}' >{{ . }}</a></li>
-                {{ end }}
-            </ul>
-            {{ else }}
-            {{ i18n "tagsNone" }}
-            {{ end }}
-        </div>
     </article>
     {{ partial "comments" . }}
     
