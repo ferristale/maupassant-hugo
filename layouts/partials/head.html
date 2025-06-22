@@ -24,17 +24,13 @@
     {{ if .IsHome -}}
     {{ if .Site.Params.subtitle -}}
     <title>{{ .Site.Title }} | {{ .Site.Params.subtitle}}</title>
-    <meta property="og:title" content="{{ .Site.Title }} | {{ .Site.Params.subtitle}}">
     {{ else -}}
     <title>{{ .Site.Title }}</title>
-    <meta property="og:title" content="{{ .Site.Title }}">
     {{ end -}}
     <meta property="og:type" content="website">
-    <meta name="Keywords" content="{{.Site.Params.keywords}}">
     <meta name="description" content="{{ .Site.Params.description }}">
     {{- else -}}
     <title>{{ .Title }} | {{ .Site.Title }}</title>
-    <meta property="og:title" content="{{ .Title }} - {{ .Site.Title }}">
     <meta property="og:type" content="article">
         {{ with .Params.date }}
     <meta property="article:published_time" content='{{ .Format "2006-01-02T15:04:05+08:00" }}'>
@@ -42,7 +38,6 @@
         {{ with .Params.lastmod }}
     <meta property="article:modified_time" content='{{ .Format "2006-01-02T15:04:05+08:00" }}'>
         {{ end }}
-    <meta name="Keywords" content="{{ if .Keywords }}{{ .Keywords }}{{ else }}{{ .Site.Params.keywords }}{{ end }}">
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Title }}{{ end }}">
         {{ if .Params.author -}}
     <meta name="author" content="{{ .Params.author }}">
@@ -50,10 +45,14 @@
         <meta name="author" content="{{ .Site.Params.Author }}">
         {{- end }}
     {{- end }}
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ if .Site.Params.subtitle }} | {{ .Site.Params.subtitle}}{{ end }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
     <meta property="og:url" content="{{ .Permalink }}">
-    <link rel="shortcut icon" href='{{ "favicon.ico" | relURL }}' type="image/x-icon">
+    
+    <!-- Favicon -->
     <link rel="icon" href='{{ "favicon.png" | relURL }}' type="image/png">
-    <link rel="alternate icon" href='{{ "favicon.png" | relURL }}' type="image/svg+xml">
+    <link rel="shortcut icon" href='{{ "favicon.ico" | relURL }}' type="image/x-icon">
 
     {{ $normalize := resources.Get "css/normalize.css" }}
     {{ $style := resources.Get "css/style.css" }}
