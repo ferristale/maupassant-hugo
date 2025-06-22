@@ -12,6 +12,16 @@ A simple Hugo template with great performance on different devices, ported from 
 
 ## Features
 
+- Responsive design for different devices
+- Local search
+- Thumbnail and preview
+- Table of contents
+- Admonition shortcodes
+- Code highlighting with copy button
+- LaTeX math support
+- Custom menus, links, and ads
+- Optimized font loading for better rendering performance
+
 #### Requirements
 
 Hugo Version >= v 0.60.0
