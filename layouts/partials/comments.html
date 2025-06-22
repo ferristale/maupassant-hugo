@@ -4,15 +4,35 @@
     <!-- utteranc -->
     {{ if .Site.Params.utteranc.enable }}
     <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "{{ .Site.Params.utteranc.repo }}"
-            issue-term="{{ .Site.Params.utteranc.issueTerm }}"
-            theme="{{ if (eq .Site.Params.defaultTheme `dark`) }}github-dark{{ else }}github-light{{ end }}"
-            crossorigin="anonymous"
-            async>
+      <script>
+        // Determine the correct theme before loading utterances
+        (function() {
+          // Get current theme
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          
+          // Determine if we should use dark theme
+          const shouldUseDarkTheme = currentTheme === 'dark' || 
+                                   (currentTheme !== 'light' && systemPrefersDark);
+          
+          const utterancesTheme = shouldUseDarkTheme ? 'github-dark' : 'github-light';
+          
+          // Create and load the utterances script with the correct theme
+          const script = document.createElement('script');
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', '{{ .Site.Params.utteranc.repo }}');
+          script.setAttribute('issue-term', '{{ .Site.Params.utteranc.issueTerm }}');
+          script.setAttribute('theme', utterancesTheme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.setAttribute('async', '');
+          
+          // Insert the script into the DOM
+          const container = document.currentScript.parentNode;
+          container.insertBefore(script, document.currentScript);
+        })();
       </script>
       <script>
-        // Function to update Utterances theme
+        // Function to update Utterances theme when it changes
         function updateUtterancesTheme() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
           const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -33,15 +53,6 @@
             utterancesFrame.contentWindow.postMessage(message, 'https://utteranc.es');
           }
         }
-        
-        // Update theme when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-          // Wait a bit for utterances to load
-          setTimeout(updateUtterancesTheme, 1000);
-          
-          // Try again after a longer delay if the frame wasn't found
-          setTimeout(updateUtterancesTheme, 3000);
-        });
         
         // Listen for theme changes
         const observer = new MutationObserver(function(mutations) {
