@@ -3,14 +3,18 @@
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
-            // Apply user preference immediately if available
+            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // Determine which theme to apply
+            let themeToApply = 'light'; // default
             if (savedTheme) {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'light');
+                themeToApply = savedTheme;
+            } else if (systemPrefersDark) {
+                themeToApply = 'dark';
             }
+            
+            // Apply theme immediately
+            document.documentElement.setAttribute('data-theme', themeToApply);
         })();
     </script>
 

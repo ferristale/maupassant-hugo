@@ -1187,7 +1187,7 @@ img.alignright {
     color: var(--theme-muted-color);
 }
 .post-archive a:hover {
-    color: var(--theme-color);
+    color: var(--theme-link-hover);
 }
 
 /* Dark theme specific styles for post-archive */
