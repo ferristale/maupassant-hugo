@@ -17,9 +17,9 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="{{ if or (.IsHome) (eq .Type "post") (eq .Type "posts") }}current{{ end }}" href="{{ .Site.BaseURL | absURL }}">{{ i18n "home" }}</a>
+                    <a class="{{ if .IsHome }}current{{ end }}" href="{{ .Site.BaseURL | absURL }}">{{ i18n "home" }}</a>
                     {{ range .Site.Menus.main }}
-                    <a {{ if eq .URL $.RelPermalink }}class="current"{{ end }} href="{{ .URL | absURL }}" title="{{ .Name }}">{{ .Name }}</a>
+                    <a {{ if or (eq .URL $.RelPermalink) (eq .URL $.Permalink) (and (eq $.Kind "page") (eq $.Type "page") (eq .Name $.Title)) }}class="current"{{ end }} href="{{ .URL | absURL }}" title="{{ .Name }}">{{ .Name }}</a>
                     {{ end }}
                 </nav>
             </div>
