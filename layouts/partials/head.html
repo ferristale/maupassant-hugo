@@ -2,19 +2,41 @@
     <!-- Prevent flash of incorrect theme by applying user preference immediately -->
     <script>
         (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            // Block CSS media queries until we determine the theme
+            const style = document.createElement('style');
+            style.textContent = `
+                /* Block all prefers-color-scheme media queries until theme is determined */
+                @media (prefers-color-scheme: dark) {
+                    :root:not([data-theme]) {
+                        /* Prevent dark theme from being applied before we check user preference */
+                        color-scheme: light;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
             
-            // Determine which theme to apply
-            let themeToApply = 'light'; // default
-            if (savedTheme) {
-                themeToApply = savedTheme;
-            } else if (systemPrefersDark) {
-                themeToApply = 'dark';
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                
+                // Determine which theme to apply
+                let themeToApply = 'light'; // default
+                if (savedTheme) {
+                    themeToApply = savedTheme;
+                } else if (systemPrefersDark) {
+                    themeToApply = 'dark';
+                }
+                
+                // Apply theme immediately
+                document.documentElement.setAttribute('data-theme', themeToApply);
+                
+                // Remove the blocking style after theme is applied
+                document.head.removeChild(style);
+            } catch (e) {
+                // Fallback to light theme if there are any errors
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.head.removeChild(style);
             }
-            
-            // Apply theme immediately
-            document.documentElement.setAttribute('data-theme', themeToApply);
         })();
     </script>
 

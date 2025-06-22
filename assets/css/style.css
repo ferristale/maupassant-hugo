@@ -22,7 +22,7 @@
     --theme-shadow: rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme variables */
+/* Dark theme variables - only apply when explicitly set */
 [data-theme="dark"] {
     --theme-bg: #1d1d1d;
     --theme-color: #e4e4e4;
@@ -38,8 +38,9 @@
     --theme-shadow: rgba(255, 255, 255, 0.1);
 }
 
+/* System preference dark theme - only apply when no user preference is set */
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) {
         --theme-bg: #1d1d1d;
         --theme-color: #e4e4e4;
         --theme-border: #404040;
@@ -52,57 +53,6 @@
         --theme-nav-current: #e4e4e4;
         --theme-blockquote-color: #bbb;
         --theme-shadow: rgba(255, 255, 255, 0.1);
-    }
-}
-
-/* Theme Toggle Button */
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--theme-secondary-bg);
-    border: 1px solid var(--theme-border);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    color: var(--theme-color);
-}
-
-.theme-toggle:hover {
-    background: var(--theme-border);
-    transform: scale(1.1);
-}
-
-.theme-toggle .icon-sun,
-.theme-toggle .icon-moon {
-    display: none;
-    font-size: 16px;
-    filter: grayscale(1);
-    color: var(--theme-color);
-}
-
-[data-theme="light"] .theme-toggle .icon-sun,
-:root:not([data-theme]) .theme-toggle .icon-sun {
-    display: block;
-}
-
-[data-theme="dark"] .theme-toggle .icon-moon {
-    display: block;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .theme-toggle .icon-moon {
-        display: block;
-    }
-    :root:not([data-theme="light"]) .theme-toggle .icon-sun {
-        display: none;
     }
 }
 
@@ -235,7 +185,7 @@ blockquote::before{
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) blockquote::before {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) blockquote::before {
         color: var(--theme-color);
     }
 }
@@ -314,7 +264,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) #logo {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) #logo {
         color: var(--theme-color);
     }
 }
@@ -327,7 +277,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) #logo span {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) #logo span {
         color: var(--theme-muted-color);
     }
 }
@@ -340,7 +290,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) #logo:hover {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) #logo:hover {
         color: var(--theme-muted-color);
     }
 }
@@ -354,7 +304,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .description {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .description {
         color: var(--theme-muted-color);
     }
 }
@@ -377,7 +327,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) #nav-menu a {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) #nav-menu a {
         color: var(--theme-color);
     }
 }
@@ -459,7 +409,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .post-title {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title {
         color: var(--theme-color);
     }
 }
@@ -472,8 +422,8 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .post-title a, 
-    :root:not([data-theme="light"]) .keyword {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title a, 
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .keyword {
         color: var(--theme-color);
     }
 }
@@ -490,7 +440,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .post-meta {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-meta {
         color: var(--theme-muted-color);
     }
 }
@@ -509,7 +459,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .post-content {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content {
         color: var(--theme-color);
     }
 }
@@ -526,11 +476,11 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .post-content h2,
-    :root:not([data-theme="light"]) .post-content h3,
-    :root:not([data-theme="light"]) .post-content h4,
-    :root:not([data-theme="light"]) .post-content h5,
-    :root:not([data-theme="light"]) .post-content h6 {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h2,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h3,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h4,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h5,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h6 {
         color: var(--theme-link-hover);
     }
 }
@@ -584,7 +534,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .archive-title {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .archive-title {
         color: var(--theme-muted-color);
     }
 }
@@ -658,7 +608,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .comment-meta a {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .comment-meta a {
         color: var(--theme-muted-color);
     }
 }
@@ -673,7 +623,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .comment-author {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .comment-author {
         color: var(--theme-color);
     }
 }
@@ -700,7 +650,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .comment-awaiting-moderation {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .comment-awaiting-moderation {
         color: var(--theme-muted-color);
     }
 }
@@ -733,7 +683,7 @@ textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) #comment-form label {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) #comment-form label {
         color: var(--theme-muted-color);
     }
 }
@@ -815,7 +765,7 @@ textarea.textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .widget-title {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .widget-title {
         color: var(--theme-muted-color);
         border-bottom:1px solid var(--theme-border);
     }
@@ -850,7 +800,7 @@ textarea.textarea {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) #footer {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) #footer {
         color: var(--theme-muted-color);
     }
 }
@@ -1181,7 +1131,7 @@ img.alignright {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .post-archive h2 {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-archive h2 {
         color: var(--theme-color);
     }
 }
@@ -1201,10 +1151,10 @@ img.alignright {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .post-archive {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-archive {
         color: var(--theme-color);
     }
-    :root:not([data-theme="light"]) .post-archive h2 {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-archive h2 {
         color: var(--theme-color);
     }
 }
@@ -1320,16 +1270,16 @@ img.alignright {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .post-copyright {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-copyright {
         background-color: var(--theme-secondary-bg);
         color: var(--theme-color);
     }
     
-    :root:not([data-theme="light"]) .post-copyright a {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-copyright a {
         color: var(--theme-color);
     }
     
-    :root:not([data-theme="light"]) .post-copyright a:hover {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-copyright a:hover {
         color: var(--theme-link-hover);
     }
 }
@@ -1355,11 +1305,11 @@ img.alignright {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .listing {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .listing {
         color: var(--theme-color);
     }
     
-    :root:not([data-theme="light"]) .listing li {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .listing li {
         color: var(--theme-color);
     }
 }
@@ -1391,11 +1341,11 @@ img.alignright {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .post-tags .tag-link {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-tags .tag-link {
         color: var(--theme-muted-color);
     }
     
-    :root:not([data-theme="light"]) .post-tags .tag-link:hover {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-tags .tag-link:hover {
         color: var(--theme-link-hover);
     }
 }
@@ -1538,7 +1488,7 @@ table tbody tr td:nth-of-type(1) pre {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .page-navigator span {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .page-navigator span {
         color: var(--theme-muted-color);
     }
 }
@@ -1555,8 +1505,59 @@ table tbody tr td:nth-of-type(1) pre {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .page-navigator .current a {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .page-navigator .current a {
         color: var(--theme-color);
+    }
+}
+  
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--theme-secondary-bg);
+    border: 1px solid var(--theme-border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    color: var(--theme-color);
+}
+
+.theme-toggle:hover {
+    background: var(--theme-border);
+    transform: scale(1.1);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+    display: none;
+    font-size: 16px;
+    filter: grayscale(1);
+    color: var(--theme-color);
+}
+
+[data-theme="light"] .theme-toggle .icon-sun,
+:root:not([data-theme]) .theme-toggle .icon-sun {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+    display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .theme-toggle .icon-moon {
+        display: block;
+    }
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .theme-toggle .icon-sun {
+        display: none;
     }
 }
   
