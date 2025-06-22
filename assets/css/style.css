@@ -108,8 +108,8 @@
 
 @font-face {
     font-family: 'icomoon';
-    src:url('fonts/icomoon.woff?-i5ysuu') format('woff'),
-        url('fonts/icomoon.ttf?-i5ysuu') format('truetype');
+    src:url('/fonts/icomoon.woff') format('woff'),
+        url('/fonts/icomoon.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -266,7 +266,8 @@ textarea {
     clear:both;
 }
 .clearfix, .col-group {
-    zoom:1;
+    transform: translateZ(0);
+    transform-origin: 0 0;
 }
 .clearfix:before, .col-group:before, .clearfix:after, .col-group:after {
     content:" ";
