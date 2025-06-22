@@ -6,6 +6,61 @@
 
 // Theme initialization is now handled inline in the head to prevent flash
 
+// Apply theme variables immediately
+(function() {
+    'use strict';
+    
+    const STORAGE_KEY = 'theme';
+    const DARK_THEME = 'dark';
+    const LIGHT_THEME = 'light';
+    
+    // CSS variables for each theme
+    const cssVars = {
+        light: {
+            '--theme-bg': '#fff',
+            '--theme-color': '#444',
+            '--theme-border': '#ddd',
+            '--theme-secondary-bg': '#f9f9f9',
+            '--theme-code-bg': '#f5f5f5',
+            '--theme-link-color': '#2c3e50',
+            '--theme-link-hover': '#e74c3c',
+            '--theme-muted-color': '#6E7173',
+            '--theme-header-border': '#ddd',
+            '--theme-nav-current': '#333',
+            '--theme-blockquote-color': '#555',
+            '--theme-shadow': 'rgba(0, 0, 0, 0.1)'
+        },
+        dark: {
+            '--theme-bg': '#1d1d1d',
+            '--theme-color': '#ffffff',
+            '--theme-border': '#404040',
+            '--theme-secondary-bg': '#2a2a2a',
+            '--theme-code-bg': '#2d2d2d',
+            '--theme-link-color': '#bdc3c7',
+            '--theme-link-hover': '#5dade2',
+            '--theme-muted-color': '#aaa',
+            '--theme-header-border': '#404040',
+            '--theme-nav-current': '#ffffff',
+            '--theme-blockquote-color': '#bbb',
+            '--theme-shadow': 'rgba(255, 255, 255, 0.1)'
+        }
+    };
+    
+    // Apply theme variables immediately
+    try {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme && cssVars[currentTheme]) {
+            const root = document.documentElement;
+            const vars = cssVars[currentTheme];
+            Object.keys(vars).forEach(key => {
+                root.style.setProperty(key, vars[key]);
+            });
+        }
+    } catch (e) {
+        console.warn('Immediate theme application failed:', e);
+    }
+})();
+
 document.addEventListener('DOMContentLoaded', function() {
     'use strict';
 
@@ -31,15 +86,15 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         dark: {
             '--theme-bg': '#1d1d1d',
-            '--theme-color': '#e4e4e4',
+            '--theme-color': '#ffffff',
             '--theme-border': '#404040',
             '--theme-secondary-bg': '#2a2a2a',
             '--theme-code-bg': '#2d2d2d',
             '--theme-link-color': '#bdc3c7',
-            '--theme-link-hover': '#3498db',
+            '--theme-link-hover': '#5dade2',
             '--theme-muted-color': '#aaa',
             '--theme-header-border': '#404040',
-            '--theme-nav-current': '#e4e4e4',
+            '--theme-nav-current': '#ffffff',
             '--theme-blockquote-color': '#bbb',
             '--theme-shadow': 'rgba(255, 255, 255, 0.1)'
         }

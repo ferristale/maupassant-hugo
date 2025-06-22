@@ -25,15 +25,15 @@
 /* Dark theme variables - only apply when explicitly set */
 [data-theme="dark"] {
     --theme-bg: #1d1d1d;
-    --theme-color: #e4e4e4;
+    --theme-color: #ffffff;
     --theme-border: #404040;
     --theme-secondary-bg: #2a2a2a;
     --theme-code-bg: #2d2d2d;
     --theme-link-color: #bdc3c7;
-    --theme-link-hover: #3498db;
+    --theme-link-hover: #5dade2; /* Updated to lighter blue for better visibility */
     --theme-muted-color: #aaa;
     --theme-header-border: #404040;
-    --theme-nav-current: #e4e4e4;
+    --theme-nav-current: #ffffff;
     --theme-blockquote-color: #bbb;
     --theme-shadow: rgba(255, 255, 255, 0.1);
 }
@@ -42,15 +42,15 @@
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]):not([data-theme="dark"]) {
         --theme-bg: #1d1d1d;
-        --theme-color: #e4e4e4;
+        --theme-color: #ffffff;
         --theme-border: #404040;
         --theme-secondary-bg: #2a2a2a;
         --theme-code-bg: #2d2d2d;
         --theme-link-color: #bdc3c7;
-        --theme-link-hover: #3498db;
+        --theme-link-hover: #5dade2; /* Updated to lighter blue for better visibility */
         --theme-muted-color: #aaa;
         --theme-header-border: #404040;
-        --theme-nav-current: #e4e4e4;
+        --theme-nav-current: #ffffff;
         --theme-blockquote-color: #bbb;
         --theme-shadow: rgba(255, 255, 255, 0.1);
     }
@@ -492,6 +492,18 @@ textarea {
     border-bottom: 1px solid #eee;
     overflow: hidden;
 }
+
+[data-theme="dark"] .post-content h3,
+[data-theme="dark"] .post-content h2 {
+    border-bottom: 1px solid #404040;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h3,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h2 {
+        border-bottom: 1px solid #404040;
+    }
+}
 .post-content pre{
     padding: 1em;
 }
@@ -565,6 +577,17 @@ textarea {
     line-height:25px;
     padding:5px 9px;
     border:1px solid var(--theme-border);
+}
+
+/* Dark theme specific styles for page navigator links */
+[data-theme="dark"] .page-navigator a {
+    color: var(--theme-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .page-navigator a {
+        color: var(--theme-color);
+    }
 }
 .page-navigator a:hover {
     background: var(--theme-secondary-bg);
@@ -1558,6 +1581,69 @@ table tbody tr td:nth-of-type(1) pre {
     }
     :root:not([data-theme="light"]):not([data-theme="dark"]) .theme-toggle .icon-sun {
         display: none;
+    }
+}
+  
+[data-theme="dark"] .post-title,
+[data-theme="dark"] .post-title a,
+[data-theme="dark"] .keyword,
+[data-theme="dark"] #logo,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6,
+[data-theme="dark"] .post-content,
+[data-theme="dark"] .page-navigator a {
+    color: #ffffff !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title a,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .keyword,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) #logo,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h1,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h2,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h3,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h4,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h5,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h6,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .page-navigator a {
+        color: #ffffff !important;
+    }
+}
+  
+/* Override specific heading styles in dark mode */
+[data-theme="dark"] .post-content h2,
+[data-theme="dark"] .post-content h3 {
+    color: #5dade2 !important; /* Lighter blue color for better visibility */
+    border-bottom-color: #404040;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title a,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .keyword,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) #logo,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h1,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h2,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h3,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h4,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h5,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) h6,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .page-navigator a {
+        color: #ffffff !important;
+    }
+    
+    /* Override specific heading styles in dark mode */
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h2,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h3 {
+        color: #5dade2 !important; /* Lighter blue color for better visibility */
+        border-bottom-color: #404040;
     }
 }
   
