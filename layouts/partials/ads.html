@@ -6,7 +6,7 @@
         <li>
             <a href="{{ .url }}" title="{{ .title }}" target="_blank" style="color:red">
                 {{ if .img }}
-                    <img src="{{ .img }}">
+                    <img loading="lazy" src="{{ .img }}">
                 {{ else }}
                     {{ .title }}
                 {{ end }}

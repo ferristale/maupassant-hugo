@@ -11,19 +11,19 @@
 <figure class="max-w-2xl mx-auto overflow-hidden">
     {{if .Page.Site.Params.fancybox }}
     <a data-fancybox="gallery" data-caption="{{ $.Title | safeHTML }}" href="{{ $img_destination | safeURL }}">
-        <img alt="{{ $.Text }}" src="{{ $img_destination | safeURL }}" />
+        <img loading="lazy" alt="{{ $.Text }}" src="{{ $img_destination | safeURL }}" />
     </a>
     {{ else }}
-        <img alt="{{ $.Text }}" src="{{ $img_destination | safeURL }}" />
+        <img loading="lazy" alt="{{ $.Text }}" src="{{ $img_destination | safeURL }}" />
     {{ end }}
     <figcaption class="p-2 text-center">{{ with $.Title | safeHTML }}{{ . }}{{ end }}</figcaption>
 </figure>
 {{- else -}}
     {{if .Page.Site.Params.fancybox }}
         <a data-fancybox="gallery" href="{{ $img_destination | safeURL }}">
-            <img class="mx-auto" alt="{{ $.Text }}" src="{{ $img_destination | safeURL }}" />
+            <img loading="lazy" class="mx-auto" alt="{{ $.Text }}" src="{{ $img_destination | safeURL }}" />
         </a>
     {{ else }}
-        <img class="mx-auto" alt="{{ $.Text }}" src="{{ $img_destination | safeURL }}" />   
+        <img loading="lazy" class="mx-auto" alt="{{ $.Text }}" src="{{ $img_destination | safeURL }}" />   
     {{ end }}
 {{- end -}}
