@@ -18,9 +18,9 @@ https://matnoble.github.io/posts/shortcodes-practice-tutorial-for-hugo/#music
       mini="{{ if .Get "mini" }}{{ .Get "mini" }}{{ else }}false{{ end }}"
       autoplay="{{ if .Get "autoplay" }}{{ .Get "autoplay" }}{{ else }}false{{ end }}"
       loop="{{ if .Get "loop" }}{{ .Get "loop" }}{{ else }}none{{ end }}"
-      theme="{{ if .Get "autoplay" }}{{ .Get "autoplay" }}{{ else }}#255579{{ end }}"
+      theme="{{ if .Get "theme" }}{{ .Get "theme" }}{{ else }}#255579{{ end }}"
       volume="{{ if .Get "volume" }}{{ .Get "volume" }}{{ else }}0.6{{ end }}"
-      prelosd="{{ if .Get "prelosd" }}{{ .Get "prelosd" }}{{ else }}auto{{ end }}"
+      preload="{{ if .Get "preload" }}{{ .Get "preload" }}{{ else }}auto{{ end }}"
       mutex="{{ if .Get "mutex" }}{{ .Get "mutex" }}{{ else }}true{{ end }}"
       list-folded="{{ if .Get "list-folded" }}{{ .Get "list-folded" }}{{ else }}true{{ end }}">
     </meting-js>
