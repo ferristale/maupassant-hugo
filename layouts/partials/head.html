@@ -96,7 +96,7 @@
     {{ end }}
     
     {{ $bundled := $cssSlice | resources.Concat "css/bundle.css" | minify | fingerprint "sha512" }}
-    <link rel="stylesheet" href="{{ $bundled.RelPermalink }}" integrity="{{ $bundled.Data.Integrity }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ $bundled.RelPermalink }}" crossorigin="anonymous">
     
     {{ range .AlternativeOutputFormats -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
