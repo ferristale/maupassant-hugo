@@ -1227,7 +1227,15 @@ img.alignright {
     #rocket.show {
       visibility: visible;
       opacity: 1; 
+      animation: rocket-float 1.8s ease-in-out infinite;
     }
+    
+    @keyframes rocket-float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+      100% { transform: translateY(0); }
+    }
+    
     #rocket.launch {
       background-position: 50% -62px;
       opacity: 0;
@@ -1236,6 +1244,7 @@ img.alignright {
       -ms-transform: translateY(-500px);
       transform: translateY(-500px);
       pointer-events: none; 
+      animation: none !important;
     }
       #rocket.launch i {
         background-position: 50% 100%;

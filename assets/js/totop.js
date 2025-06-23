@@ -7,12 +7,17 @@
     
     // Show/hide rocket based on scroll position
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
+        if (window.scrollY > 10) {
             rocket.classList.add('show');
         } else {
             rocket.classList.remove('show');
         }
     });
+    
+    // Initial check in case page is already scrolled on load
+    if (window.scrollY > 20) {
+        rocket.classList.add('show');
+    }
     
     // Scroll to top with animation when rocket is clicked
     rocket.addEventListener('click', function(e) {
