@@ -1656,3 +1656,14 @@ table tbody tr td:nth-of-type(1) pre {
     }
 }
   
+.post-title a:hover {
+    color: #ba3925;
+}
+[data-theme="dark"] .post-title a:hover {
+    color: var(--theme-link-hover);
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title a:hover {
+        color: var(--theme-link-hover);
+    }
+}
