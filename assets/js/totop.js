@@ -1,40 +1,25 @@
-// Vanilla JS implementation of back-to-top functionality
-(function() {
+// Vanilla JS back-to-top (rocket) functionality
+(() => {
     'use strict';
-    
     const rocket = document.getElementById('rocket');
     if (!rocket) return;
-    
-    // Show/hide rocket based on scroll position
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 10) {
-            rocket.classList.add('show');
-        } else {
-            rocket.classList.remove('show');
-        }
-    });
-    
-    // Initial check in case page is already scrolled on load
-    if (window.scrollY > 20) {
-        rocket.classList.add('show');
-    }
-    
-    // Scroll to top with animation when rocket is clicked
-    rocket.addEventListener('click', function(e) {
+
+    const toggleRocket = () => rocket.classList.toggle('show', window.scrollY > 10);
+    window.addEventListener('scroll', toggleRocket);
+    toggleRocket(); // Initial state
+
+    rocket.addEventListener('click', e => {
         e.preventDefault();
         rocket.classList.add('launch');
-        
-        const scrollToTop = function() {
+        const scrollToTop = () => {
             const c = document.documentElement.scrollTop || document.body.scrollTop;
             if (c > 0) {
-                window.requestAnimationFrame(scrollToTop);
                 window.scrollTo(0, c - c / 8);
+                window.requestAnimationFrame(scrollToTop);
             } else {
-                rocket.classList.remove('show');
-                rocket.classList.remove('launch');
+                rocket.classList.remove('show', 'launch');
             }
         };
-        
         scrollToTop();
         return false;
     });
