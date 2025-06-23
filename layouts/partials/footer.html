@@ -145,10 +145,10 @@
     
     <!-- Fancybox -->
     {{ if .Site.Params.fancybox }}
-        {{ $fancyboxJS := resources.GetRemote "https://cdn.jsdelivr.net/npm/@fancyapps/ui@6/dist/fancybox/fancybox.umd.min.js" | minify | fingerprint "sha512" }}
-        <script type="text/javascript" src="{{ $fancyboxJS.RelPermalink }}" crossorigin="anonymous" defer></script>
-        {{ $fancyboxInit := resources.Get "js/fancybox-init.js" | minify | fingerprint "sha512" }}
-        <script type="text/javascript" src="{{ $fancyboxInit.RelPermalink }}" crossorigin="anonymous" defer></script>
+        {{ $fancyboxJS := resources.GetRemote "https://cdn.jsdelivr.net/npm/@fancyapps/ui@6/dist/fancybox/fancybox.umd.min.js" | minify }}
+        <script type="text/javascript" src="{{ $fancyboxJS.RelPermalink }}" defer></script>
+        {{ $fancyboxInit := resources.Get "js/fancybox-init.js" | minify }}
+        <script type="text/javascript" src="{{ $fancyboxInit.RelPermalink }}" defer></script>
     {{ end }}
 {{ end }}
 
@@ -166,6 +166,6 @@
 
 <!-- custom js -->
 {{ range .Site.Params.customJS }}
-    {{ $customJS := resources.Get (printf "js/%s" .) | minify | fingerprint "sha512" }}
-    <script src="{{ $customJS.RelPermalink }}" crossorigin="anonymous"></script>
+    {{ $customJS := resources.Get (printf "js/%s" .) | minify }}
+    <script src="{{ $customJS.RelPermalink }}"></script>
 {{ end }}

@@ -95,14 +95,14 @@
         {{ $cssSlice = $cssSlice | append $fancyboxCSS | append $fancyboxCustomCSS }}
     {{ end }}
     
-    {{ $bundled := $cssSlice | resources.Concat "css/bundle.css" | minify | fingerprint "sha512" }}
-    <link rel="stylesheet" href="{{ $bundled.RelPermalink }}" crossorigin="anonymous">
+    {{ $bundled := $cssSlice | resources.Concat "css/bundle.css" | minify }}
+    <link rel="stylesheet" href="{{ $bundled.RelPermalink }}">
     
     {{ range .AlternativeOutputFormats -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
     
-    {{ $themeJS := resources.Get "js/theme-switch.js" | minify | fingerprint "sha512" }}
+    {{ $themeJS := resources.Get "js/theme-switch.js" | minify }}
     <script type="text/javascript" src="{{ $themeJS.RelPermalink }}"></script>
 
     {{ if .Site.Params.googleAd }}
