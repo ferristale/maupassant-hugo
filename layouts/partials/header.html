@@ -4,12 +4,12 @@
             <div class="site-name ">
                 {{ if .IsHome }}
                     <h1>
-                        <a id="logo" href="{{ .Site.BaseURL | absURL }}">
+                        <a id="logo" href="{{ .Site.BaseURL | relURL }}">
                             {{ .Site.Title }}
                         </a>
                     </h1>
                 {{ else }}
-                    <a id="logo" href="{{ .Site.BaseURL | absURL }}">
+                    <a id="logo" href="{{ .Site.BaseURL | relURL }}">
                         {{ .Site.Title }}
                     </a>
                 {{ end }}
@@ -18,9 +18,9 @@
             <div>
                 <div id="theme-toggle-container"></div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="{{ if .IsHome }}current{{ end }}" href="{{ .Site.BaseURL | absURL }}">{{ i18n "home" }}</a>
+                    <a class="{{ if .IsHome }}current{{ end }}" href="{{ .Site.BaseURL | relURL }}">{{ i18n "home" }}</a>
                     {{ range .Site.Menus.main }}
-                    <a {{ if or (eq .URL $.RelPermalink) (eq .URL $.Permalink) (and (eq $.Kind "page") (eq $.Type "page") (eq .Name $.Title)) }}class="current"{{ end }} href="{{ .URL | absURL }}" title="{{ .Name }}">{{ .Name }}</a>
+                    <a {{ if or (eq .URL $.RelPermalink) (eq .URL $.Permalink) (and (eq $.Kind "page") (eq $.Type "page") (eq .Name $.Title)) }}class="current"{{ end }} href="{{ .URL | relURL }}" title="{{ .Name }}">{{ .Name }}</a>
                     {{ end }}
                 </nav>
             </div>
