@@ -1269,6 +1269,14 @@ img.alignright {
     border-bottom-color: #D26911;
     color: var(--theme-color);
 }
+[data-theme="dark"] .readmore a:hover {
+    border-bottom-color: var(--theme-link-hover);
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .readmore a:hover {
+        border-bottom-color: var(--theme-link-hover);
+    }
+}
 /* 版权声明 */
 .post-copyright {
     margin: 2em 0 0;
@@ -1660,10 +1668,10 @@ table tbody tr td:nth-of-type(1) pre {
     color: #ba3925;
 }
 [data-theme="dark"] .post-title a:hover {
-    color: var(--theme-link-hover);
+    color: var(--theme-link-hover) !important;
 }
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title a:hover {
-        color: var(--theme-link-hover);
+        color: var(--theme-link-hover) !important;
     }
 }
