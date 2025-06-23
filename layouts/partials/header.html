@@ -16,6 +16,7 @@
                 {{ with .Site.Params.subtitle }}<p class="description">{{ . }}</p>{{ end }}
             </div>
             <div>
+                <div id="theme-toggle-container"></div>
                 <nav id="nav-menu" class="clearfix">
                     <a class="{{ if .IsHome }}current{{ end }}" href="{{ .Site.BaseURL | absURL }}">{{ i18n "home" }}</a>
                     {{ range .Site.Menus.main }}

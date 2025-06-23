@@ -1547,8 +1547,8 @@ table tbody tr td:nth-of-type(1) pre {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: var(--theme-secondary-bg);
-    border: 1px solid var(--theme-border);
+    border: none;
+    background: none;
     border-radius: 50%;
     width: 40px;
     height: 40px;
