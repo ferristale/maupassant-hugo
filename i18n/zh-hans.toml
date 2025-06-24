@@ -25,6 +25,11 @@
   [previous]
     other = "上一页"
 
+  [post_next]
+    other = "不問將來"
+  [post_previous]
+    other = "不念過往"
+
   [toc]
     other = "文章目录"
 # END: Base

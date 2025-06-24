@@ -25,6 +25,11 @@
   [previous]
     other = "이전의"
 
+  [post_next]
+    other = "다음 글"
+  [post_previous]
+    other = "이전 글"
+
   [toc]
     other = "목차."
 # END: Base

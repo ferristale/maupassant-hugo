@@ -1675,3 +1675,115 @@ table tbody tr td:nth-of-type(1) pre {
         color: var(--theme-link-hover) !important;
     }
 }
+
+/* Post Navigation */
+.post-navigation {
+    margin: 1em 0;
+}
+
+.post-navigation h2 {
+    margin-bottom: 1em;
+    font-size: 1.2em;
+    color: var(--theme-color);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+.nav-previous,
+.nav-next {
+    flex: 1;
+    max-width: 48%;
+}
+
+.nav-previous a,
+.nav-next a {
+    display: block;
+    text-decoration: none;
+    color: var(--theme-color);
+    transition: color 0.2s ease;
+}
+
+.nav-previous a:hover,
+.nav-next a:hover {
+    color: var(--theme-link-hover);
+}
+
+.nav-subtitle {
+    display: block;
+    font-size: 0.8em;
+    color: var(--theme-muted-color);
+    margin-bottom: 0.3em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-title {
+    display: block;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.nav-next {
+    text-align: right;
+}
+
+.nav-next a {
+    text-align: right;
+}
+
+/* Dark theme specific styles for post navigation */
+[data-theme="dark"] .post-navigation h2 {
+    color: var(--theme-color);
+}
+
+[data-theme="dark"] .nav-previous a,
+[data-theme="dark"] .nav-next a {
+    color: var(--theme-color);
+}
+
+[data-theme="dark"] .nav-previous a:hover,
+[data-theme="dark"] .nav-next a:hover {
+    color: var(--theme-link-hover);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-navigation h2 {
+        color: var(--theme-color);
+    }
+    
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .nav-previous a,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .nav-next a {
+        color: var(--theme-color);
+    }
+    
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .nav-previous a:hover,
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .nav-next a:hover {
+        color: var(--theme-link-hover);
+    }
+}
+
+/* Responsive design for post navigation */
+@media print, screen and (max-width: 680px) {
+    .nav-links {
+        flex-direction: column;
+        gap: 1em;
+    }
+    
+    .nav-previous,
+    .nav-next {
+        max-width: 100%;
+    }
+    
+    .nav-next {
+        text-align: left;
+    }
+    
+    .nav-next a {
+        text-align: left;
+    }
+}

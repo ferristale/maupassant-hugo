@@ -25,6 +25,11 @@
   [previous]
     other = "Previous"
 
+  [post_next]
+    other = "Next Post"
+  [post_previous]
+    other = "Previous Post"
+
   [toc]
     other = "Table of Contents"
 # END: Base

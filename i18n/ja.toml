@@ -25,6 +25,11 @@
   [previous]
     other = "前の"
 
+  [post_next]
+    other = "次の記事"
+  [post_previous]
+    other = "前の記事"
+
   [toc]
     other = "目次"
 # END: Base

@@ -1,0 +1,26 @@
+{{ $prev := .PrevInSection }}
+{{ $next := .NextInSection }}
+
+{{ if or $prev $next }}
+<div class="post-navigation">
+    <div class="nav-links">
+        {{ if $prev }}
+        <div class="nav-previous">
+            <a href="{{ $prev.RelPermalink }}" rel="prev">
+                <span class="nav-subtitle">{{ i18n "post_previous" }}</span>
+                <span class="nav-title">{{ $prev.Title }}</span>
+            </a>
+        </div>
+        {{ end }}
+        
+        {{ if $next }}
+        <div class="nav-next">
+            <a href="{{ $next.RelPermalink }}" rel="next">
+                <span class="nav-subtitle">{{ i18n "post_next" }}</span>
+                <span class="nav-title">{{ $next.Title }}</span>
+            </a>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }} 
