@@ -66,6 +66,11 @@
     other = "Keyword"
   [Search_results]
     other = "results"
+
+  [showComments]
+    other = "Show Comments"
+  [hideComments]
+    other = "Hide Comments"
 # END: Theme
 
 # BGN: Copyright

@@ -1787,3 +1787,79 @@ table tbody tr td:nth-of-type(1) pre {
         text-align: left;
     }
 }
+
+/* Comments Toggle Styles */
+.comments-toggle-container {
+    margin: 1em 0;
+    text-align: center;
+}
+
+.comments-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--theme-link-color);
+    padding: 12px 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+}
+
+.comments-toggle-btn:hover {
+    color: var(--theme-link-hover);
+}
+
+.comments-toggle-btn.active {
+    color: var(--theme-link-hover);
+}
+
+.toggle-icon {
+    font-size: 14px;
+}
+
+.comments-container {
+    margin-top: 1em;
+}
+
+/* Dark theme adjustments for comments toggle */
+[data-theme="dark"] .comments-toggle-btn {
+    color: var(--theme-link-color);
+}
+
+[data-theme="dark"] .comments-toggle-btn:hover {
+    color: var(--theme-link-hover);
+}
+
+[data-theme="dark"] .comments-toggle-btn.active {
+    color: var(--theme-link-hover);
+}
+
+/* System preference dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .comments-toggle-btn {
+        color: var(--theme-link-color);
+    }
+    
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .comments-toggle-btn:hover {
+        color: var(--theme-link-hover);
+    }
+    
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .comments-toggle-btn.active {
+        color: var(--theme-link-hover);
+    }
+}
+
+/* Mobile responsive adjustments */
+@media print, screen and (max-width: 680px) {
+    .comments-toggle-btn {
+        padding: 10px 0;
+        font-size: 15px;
+    }
+    
+    .toggle-icon {
+        font-size: 13px;
+    }
+}

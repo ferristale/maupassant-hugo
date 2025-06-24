@@ -66,6 +66,11 @@
     other = "哈哈"
   [Search_results]
     other = "的結果"
+
+  [showComments]
+    other = "顯示評論"
+  [hideComments]
+    other = "隱藏評論"
 # END: Theme
 
 # BGN: Copyright

@@ -66,6 +66,11 @@
     other = "キーワード"
   [Search_results]
     other = "検索結果"
+
+  [showComments]
+    other = "コメントを表示"
+  [hideComments]
+    other = "コメントを隠す"
 # END: Theme
 
 # BGN: Copyright

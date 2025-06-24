@@ -66,6 +66,11 @@
     other = "哈哈"
   [Search_results]
     other = "的结果"
+
+  [showComments]
+    other = "显示评论"
+  [hideComments]
+    other = "隐藏评论"
 # END: Theme
 
 # BGN: Copyright

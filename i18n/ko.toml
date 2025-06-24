@@ -66,6 +66,11 @@
     other = "핵심어"
   [Search_results]
     other = "결과."
+
+  [showComments]
+    other = "댓글 표시"
+  [hideComments]
+    other = "댓글 숨기기"
 # END: Theme
 
 # BGN: Copyright
