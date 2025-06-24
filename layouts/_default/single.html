@@ -35,7 +35,10 @@
 
         {{ partial "copyright" .}}
 
+        <!-- Only show post navigation for regular posts, not for pages -->
+        {{ if eq .Type "post" }}
         {{ partial "post-navigation" . }}
+        {{ end }}
     </article>
     {{ partial "comments" . }}
     
