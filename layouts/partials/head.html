@@ -64,7 +64,7 @@
         {{ with .Params.lastmod }}
     <meta property="article:modified_time" content='{{ .Format "2006-01-02T15:04:05+08:00" }}'>
         {{ end }}
-    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Title }}{{ end }}">
+    <meta name="description" content="{{ .Summary | plainify }}">
         {{ if .Params.author -}}
     <meta name="author" content="{{ .Params.author }}">
         {{ else }}
