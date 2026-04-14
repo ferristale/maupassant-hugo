@@ -1,5 +1,5 @@
 {{ define "content"}}
-{{- $paginator := .Paginate .Data.Pages.ByDate.Reverse 10 }}
+{{- $paginator := .Paginate .Pages.ByDate.Reverse 10 }}
 <div class="res-cons">
     {{ range $index,$data := $paginator.Pages }}
     {{ if not .Params.hidden }}
