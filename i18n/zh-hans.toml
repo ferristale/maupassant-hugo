@@ -71,6 +71,15 @@
     other = "显示评论"
   [hideComments]
     other = "隐藏评论"
+
+  [Taxonomy_total_categories]
+    other = "共有{{ . }}个分类"
+  [Taxonomy_total_tags]
+    other = "共有{{ . }}个标签"
+  [Taxonomy_category_header]
+    other = '分类 <span class="keyword">{{ . }}</span> 中的文章'
+  [Taxonomy_tag_header]
+    other = '包含标签 <span class="keyword">{{ . }}</span> 的文章'
 # END: Theme
 
 # BGN: Copyright

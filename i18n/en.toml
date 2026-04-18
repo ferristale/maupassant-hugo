@@ -71,6 +71,17 @@
     other = "Show Comments"
   [hideComments]
     other = "Hide Comments"
+
+  [Taxonomy_total_categories]
+    one = "{{ . }} category in total"
+    other = "{{ . }} categories in total"
+  [Taxonomy_total_tags]
+    one = "{{ . }} tag in total"
+    other = "{{ . }} tags in total"
+  [Taxonomy_category_header]
+    other = 'Articles in category <span class="keyword">{{ . }}</span>'
+  [Taxonomy_tag_header]
+    other = 'Articles tagged with <span class="keyword">{{ . }}</span>'
 # END: Theme
 
 # BGN: Copyright

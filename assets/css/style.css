@@ -163,7 +163,6 @@ blockquote {
     margin-block-end: 1em;
     margin-inline-start: 40px;
     margin-inline-end: 40px;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 2.5em 0;
     padding: 0 0 0 50px;
@@ -204,8 +203,6 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
     background: var(--theme-bg);
     color: var(--theme-color);
     width:100%;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
     box-sizing:border-box;
     outline:none;
     transition: var(--theme-transition);
@@ -943,10 +940,7 @@ img.alignright {
     line-height: 14px;
     letter-spacing: 1px;
     font-size: 14px;
-    -moz-user-select: -moz-none;
     -webkit-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
     user-select: none;
 }
 .index404:hover{

@@ -21,9 +21,9 @@
     {{ $defaultCdnJsSite := "cdnjs.cloudflare.com" }}
     
     <!-- Load visualization scripts only when needed -->
-    {{ $hasGraphviz := and (or .Params.graphviz.enable (and .Site.Params.graphviz.enable (ne .Params.graphviz.enable false))) (or .IsPage .IsHome) }}
-    {{ $hasFlowchart := and (or .Params.flowchartDiagrams.enable (and .Site.Params.flowchartDiagrams.enable (ne .Params.flowchartDiagrams.enable false))) (or .IsPage .IsHome) }}
-    {{ $hasSequence := and (or .Params.sequenceDiagrams.enable (and .Site.Params.sequenceDiagrams.enable (ne .Params.sequenceDiagrams.enable false))) (or .IsPage .IsHome) }}
+    {{ $hasGraphviz := or .Params.graphviz.enable (and .Site.Params.graphviz.enable (ne .Params.graphviz.enable false)) }}
+    {{ $hasFlowchart := or .Params.flowchartDiagrams.enable (and .Site.Params.flowchartDiagrams.enable (ne .Params.flowchartDiagrams.enable false)) }}
+    {{ $hasSequence := or .Params.sequenceDiagrams.enable (and .Site.Params.sequenceDiagrams.enable (ne .Params.sequenceDiagrams.enable false)) }}
     
     {{ if or $hasGraphviz $hasFlowchart $hasSequence }}
     <!-- Common visualization scripts -->

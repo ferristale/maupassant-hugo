@@ -71,6 +71,15 @@
     other = "댓글 표시"
   [hideComments]
     other = "댓글 숨기기"
+
+  [Taxonomy_total_categories]
+    other = "총 {{ . }}개의 분류"
+  [Taxonomy_total_tags]
+    other = "총 {{ . }}개의 태그"
+  [Taxonomy_category_header]
+    other = '분류 <span class="keyword">{{ . }}</span>의 글'
+  [Taxonomy_tag_header]
+    other = '태그 <span class="keyword">{{ . }}</span>의 글'
 # END: Theme
 
 # BGN: Copyright

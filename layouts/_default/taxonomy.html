@@ -1,17 +1,9 @@
 {{ define "content"}}
 <div class="res-cons">
     {{ if eq .Data.Singular "category" }}
-    <h3 class="archive-title">
-        分类
-        <span class="keyword">{{ .Data.Term }}</span>
-        {{ i18n "Articles" }}
-    </h3>
+    <h3 class="archive-title">{{ i18n "Taxonomy_category_header" .Data.Term | safeHTML }}</h3>
     {{ else if eq .Data.Singular "tag" }}
-    <h3 class="archive-title">
-        包含标签
-        <span class="keyword">{{ .Data.Term }}</span>
-        {{ i18n "Articles" }}
-    </h3>
+    <h3 class="archive-title">{{ i18n "Taxonomy_tag_header" .Data.Term | safeHTML }}</h3>
     {{ end }}
 
     {{ range $index,$data := .Paginator.Pages }}

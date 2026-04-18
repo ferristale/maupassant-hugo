@@ -71,6 +71,15 @@
     other = "コメントを表示"
   [hideComments]
     other = "コメントを隠す"
+
+  [Taxonomy_total_categories]
+    other = "合計{{ . }}カテゴリ"
+  [Taxonomy_total_tags]
+    other = "合計{{ . }}タグ"
+  [Taxonomy_category_header]
+    other = 'カテゴリ <span class="keyword">{{ . }}</span> の記事'
+  [Taxonomy_tag_header]
+    other = 'タグ <span class="keyword">{{ . }}</span> の記事'
 # END: Theme
 
 # BGN: Copyright

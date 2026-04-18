@@ -1,67 +1,42 @@
 {{ define "content"}}
-{{- $datetime_format := i18n "Datetime_format" -}}
-<div class="res-cons">
+<div class="res-cons"
+     data-feed-url="{{ "index.xml" | absURL }}"
+     data-continue-reading="{{ i18n "continueReading" }}">
     <h3 class="archive-title">
         {{ i18n "Search" }}
-        <span class="keyword">{{ i18n "Search_keyword" }}</span>
+        <span class="keyword"></span>
         {{ i18n "Search_results" }}
     </h3>
-
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="链接" >标题</a>
-            </h1>
-        </header>
-        {{ if not .PublishDate.IsZero }}<time datetime="{{ .PublishDate.UTC.Format "2006-01-02T15:04:05Z07:00" }}" class="post-meta meta-date dt-published">{{ time.Format $datetime_format .PublishDate }}</time>{{ end }}
-        <div class="post-content">
-            概要……
-            <p class="readmore"><a href="链接" >{{ i18n "continueReading" }}</a></p>
-        </div>
-    </article>
-
+    <div id="search-results"></div>
 </div>
 
-<script type="text/javascript">
+<script>
+(() => {
+    const root = document.querySelector('.res-cons');
+    const results = document.getElementById('search-results');
+    const q = (new URLSearchParams(location.search).get('q') || '').trim();
+    root.querySelector('.keyword').textContent = q;
+    if (!q) return;
 
-    var getUrlParameter = function getUrlParameter (sParam) {
-        var sPageURL = window.location.search.substring(1),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
+    const { feedUrl, continueReading } = root.dataset;
 
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
-
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-            }
-        }
-    };
-
-    $(document).ready(function () {
-        var q = getUrlParameter("q");
-        $("span.keyword").text(q);
-        $("article.post").remove();
-        $.ajax({
-            url: '{{"index.xml"|absURL}}',
-            dataType: "xml",
-            success: function (data) {
-                $(data).find("item").each(function () {
-                    var item = $(this);
-                    var title = item.find("title").text();
-                    if (title.toLowerCase().indexOf(q.toLowerCase()) >= 0) {
-                        var url = item.find("link").text();
-                        var searchItem = `<article class="post"><header><h1 class="post-title"><a href="` + url + `" >` + title + `</a></h1></header>`;
-                        var pubDate = new Date(item.find("pubDate").text())
-                        searchItem += `<time class="post-meta meta-date">` + pubDate.getFullYear() + `-` + (pubDate.getMonth() + 1) + `-` + pubDate.getDate() + `</time>`;
-                        searchItem += `<div class="post-content">` + item.find("description").text() + `……<p class="readmore"><a href="` + url + `" >` + {{ i18n "continueReading" }} + `</a></p></div></article>`;
-
-                        $("div.res-cons").append(searchItem);
-                    }
-                });
-            }
-        });
+    fetch(feedUrl).then(r => r.text()).then(text => {
+        const doc = new DOMParser().parseFromString(text, 'application/xml');
+        const needle = q.toLowerCase();
+        const html = [...doc.querySelectorAll('item')].map(item => {
+            const get = tag => item.querySelector(tag)?.textContent || '';
+            const title = get('title'), desc = get('description');
+            if (!title.toLowerCase().includes(needle) && !desc.toLowerCase().includes(needle)) return '';
+            const url = get('link');
+            const d = new Date(get('pubDate'));
+            return `<article class="post">
+                <header><h1 class="post-title"><a href="${url}">${title}</a></h1></header>
+                <time class="post-meta meta-date">${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}</time>
+                <div class="post-content">${desc}……<p class="readmore"><a href="${url}">${continueReading}</a></p></div>
+            </article>`;
+        }).join('');
+        results.innerHTML = html || '<p class="post-content">……</p>';
     });
+})();
 </script>
 {{ end }}
