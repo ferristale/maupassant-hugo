@@ -15,6 +15,7 @@
     --theme-code-bg: #f5f5f5;
     --theme-link-color: #2c3e50;
     --theme-link-hover: #e74c3c;
+    --theme-link-hover-dark: #ba3925;
     --theme-muted-color: #6E7173;
     --theme-header-border: #ddd;
     --theme-nav-current: #333;
@@ -34,6 +35,7 @@
     --theme-code-bg: #2d2d2d;
     --theme-link-color: #bdc3c7;
     --theme-link-hover: #5dade2; /* Updated to lighter blue for better visibility */
+    --theme-link-hover-dark: #2980b9;
     --theme-muted-color: #aaa;
     --theme-header-border: #404040;
     --theme-nav-current: #ffffff;
@@ -51,6 +53,7 @@
         --theme-code-bg: #2d2d2d;
         --theme-link-color: #bdc3c7;
         --theme-link-hover: #5dade2; /* Updated to lighter blue for better visibility */
+        --theme-link-hover-dark: #2980b9;
         --theme-muted-color: #aaa;
         --theme-header-border: #404040;
         --theme-nav-current: #ffffff;
@@ -283,17 +286,7 @@ textarea {
     }
 }
 #logo:hover {
-    color: #777;
-}
-
-[data-theme="dark"] #logo:hover {
-    color: var(--theme-muted-color);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):not([data-theme="dark"]) #logo:hover {
-        color: var(--theme-muted-color);
-    }
+    color: var(--theme-muted-color) !important;
 }
 .description {
     margin:5px 0 0;
@@ -332,6 +325,19 @@ textarea {
         color: var(--theme-color);
     }
 }
+#nav-menu a:not(.current):hover {
+    color: #777;
+}
+
+[data-theme="dark"] #nav-menu a:not(.current):hover {
+    color: var(--theme-muted-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) #nav-menu a:not(.current):hover {
+        color: var(--theme-muted-color);
+    }
+}
 #nav-menu a:first-child {
     border:none;
 }
@@ -356,6 +362,9 @@ textarea {
 #search input::placeholder {
     color: var(--theme-muted-color);
     opacity: 1;
+}
+#search input:hover::placeholder {
+    color: var(--theme-link-hover-dark);
 }
 #search button {
     position:absolute;
@@ -593,11 +602,11 @@ textarea {
 }
 .page-navigator a:hover {
     background: var(--theme-secondary-bg);
-    border-bottom-color:#D26911;
+    border-bottom-color: var(--theme-link-hover);
 }
 .page-navigator .current a {
     background: var(--theme-secondary-bg);
-    border-bottom-color:#D26911;
+    border-bottom-color: var(--theme-link-hover);
     color: #444;
 }
 .comment-list, .comment-list ol {
@@ -851,10 +860,10 @@ textarea.textarea {
     position:relative;
     bottom:-4px;
 }
-.post-content hr, .comment-content hr {
-    margin:2.1em auto;
+.post-content hr, .comment-content hr, .post hr {
+    margin:3.5em 0 1em 50px;
     width:200px;
-    border:1px solid #ccc;
+    border:1px solid var(--theme-border);
     border-width:1px 0 0 0;
     position: relative;
 }
@@ -1232,7 +1241,7 @@ img.alignright {
 }
 .readmore a:hover {
     background: var(--theme-secondary-bg);
-    border-bottom-color: #D26911;
+    border-bottom-color: var(--theme-link-hover);
     color: var(--theme-color);
 }
 [data-theme="dark"] .readmore a:hover {
@@ -1257,8 +1266,8 @@ img.alignright {
     border-bottom: 1px solid var(--theme-border);
 }
 .post-copyright a:hover {
-    color: #D26911;
-    border-bottom-color: #D26911;
+    color: var(--theme-link-hover);
+    border-bottom-color: var(--theme-link-hover);
 }
 
 /* Dark theme specific styles */
@@ -1488,7 +1497,7 @@ table tbody tr td:nth-of-type(1) pre {
   
 .page-navigator .current a {
     background: var(--theme-secondary-bg);
-    border-bottom-color:#D26911;
+    border-bottom-color: var(--theme-link-hover);
     color: #444;
 }
 
@@ -1618,15 +1627,10 @@ table tbody tr td:nth-of-type(1) pre {
 }
   
 .post-title a:hover {
-    color: #ba3925;
+    color: var(--theme-link-hover-dark) !important;
 }
-[data-theme="dark"] .post-title a:hover {
-    color: var(--theme-link-hover) !important;
-}
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title a:hover {
-        color: var(--theme-link-hover) !important;
-    }
+.widget-title a:hover {
+    color: var(--theme-link-hover-dark);
 }
 
 /* Post Navigation */

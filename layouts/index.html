@@ -11,9 +11,10 @@
         </header>
         {{ partial "post-meta.html" . }}
         <div class="post-content">
-            {{ .Summary }}……
+            {{ .Summary }}
         </div>
         <p class="readmore"><a href="{{ .Permalink }}" >{{ i18n "continueReading" }}</a></p>
+        <hr>
     </article>
     {{ end }}
     {{ end }}
