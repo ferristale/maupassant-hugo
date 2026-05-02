@@ -1,0 +1,11 @@
+{{- $needsMath := false -}}
+{{- if .IsPage -}}
+    {{- if isset .Params "math" -}}
+        {{- $needsMath = .Params.math -}}
+    {{- else -}}
+        {{- $raw := .RawContent -}}
+        {{- $hasInlineMath := gt (len (findRE `(?s)(^|[^\\$])\$[^$\n]*(\\[A-Za-z]+|[=^_{}])[^$\n]*\$` $raw 1)) 0 -}}
+        {{- $needsMath = or (in $raw "$$") (in $raw "\\(") (in $raw "\\[") (in $raw "\\begin{") $hasInlineMath -}}
+    {{- end -}}
+{{- end -}}
+{{- return $needsMath -}}

@@ -1,0 +1,12 @@
+{{- $needsFancybox := false -}}
+{{- if and .IsPage .Site.Params.fancybox -}}
+    {{- if isset .Params "fancybox" -}}
+        {{- $needsFancybox = .Params.fancybox -}}
+    {{- else -}}
+        {{- $raw := .RawContent -}}
+        {{- $hasMarkdownImage := gt (len (findRE `!\[[^\]]*\]\(` $raw 1)) 0 -}}
+        {{- $hasHtmlImage := gt (len (findRE `(?i)<img[\s>]` $raw 1)) 0 -}}
+        {{- $needsFancybox = or $hasMarkdownImage $hasHtmlImage -}}
+    {{- end -}}
+{{- end -}}
+{{- return $needsFancybox -}}

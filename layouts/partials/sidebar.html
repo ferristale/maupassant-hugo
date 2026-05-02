@@ -4,17 +4,17 @@
     </section>
 
     <section class="widget">
-        {{ partial "recent_post" . }}
+        {{ partialCached "recent_post" . .Site.Language.Lang }}
     </section>
 
     {{ partial "ads" . }}
 
     <section class="widget">
-        {{ partial "categories" . }}
+        {{ partialCached "categories" . .Site.Language.Lang }}
     </section>
 
     <section class="widget">
-        {{ partial "tags" . }}
+        {{ partialCached "tags" . .Site.Language.Lang }}
     </section>
 
     {{ partial "links" . }}

@@ -87,13 +87,16 @@
         {{ $cssSlice = $cssSlice | append $customCSS }}
     {{ end }}
     
-    {{ if .Site.Params.fancybox }}
+    {{ $needsFancybox := partial "needs-fancybox.html" . }}
+    {{ .Scratch.Set "needsFancybox" $needsFancybox }}
+    {{ if $needsFancybox }}
         {{ $fancyboxCSS := resources.GetRemote "https://cdn.jsdelivr.net/npm/@fancyapps/ui@6/dist/fancybox/fancybox.min.css" }}
         {{ $fancyboxCustomCSS := resources.Get "css/fancybox-custom.css" }}
         {{ $cssSlice = $cssSlice | append $fancyboxCSS | append $fancyboxCustomCSS }}
     {{ end }}
     
-    {{ $bundled := $cssSlice | resources.Concat "css/bundle.css" | minify }}
+    {{ $bundlePath := cond $needsFancybox "css/bundle-fancybox.css" "css/bundle.css" }}
+    {{ $bundled := $cssSlice | resources.Concat $bundlePath | minify }}
     <link rel="stylesheet" href="{{ $bundled.RelPermalink }}">
     
     {{ range .AlternativeOutputFormats -}}

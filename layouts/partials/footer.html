@@ -133,6 +133,7 @@
     {{ end }}
     
     <!-- MathJax -->
+    {{ if partial "needs-math.html" . }}
     <script type="text/javascript">
         window.MathJax = {
             tex2jax: {
@@ -142,9 +143,10 @@
         };
     </script>
     <script src='//{{ .Site.Params.cdnJsSite | default $defaultCdnJsSite }}/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    {{ end }}
     
     <!-- Fancybox -->
-    {{ if .Site.Params.fancybox }}
+    {{ if .Scratch.Get "needsFancybox" }}
         {{ $fancyboxJS := resources.GetRemote "https://cdn.jsdelivr.net/npm/@fancyapps/ui@6/dist/fancybox/fancybox.umd.min.js" | minify }}
         <script type="text/javascript" src="{{ $fancyboxJS.RelPermalink }}" defer></script>
         {{ $fancyboxInit := resources.Get "js/fancybox-init.js" | minify }}
