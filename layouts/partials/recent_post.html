@@ -3,7 +3,7 @@
 <ul class="widget-list">
     {{ range first 10 $posts }}
     <li>
-        <a href="{{ .Permalink }}" title="{{ .Title }}" >{{ .Title }}</a>
+        <a href="{{ .RelPermalink }}" title="{{ .Title }}" >{{ .Title }}</a>
     </li>
     {{ end }}
 </ul>

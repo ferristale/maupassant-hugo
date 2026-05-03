@@ -49,7 +49,7 @@
     other = "閱讀"
 
   [Feed_rss]
-    other = "文章 RSS"
+    other = "RSS"
 
   [links]
     other = "友情鏈接"
