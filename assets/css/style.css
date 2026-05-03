@@ -62,7 +62,6 @@
 
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-search:before {
@@ -109,7 +108,6 @@ body {
     color: var(--theme-color);
     font-size: 15px;
     font-family: "Iowan Old Style", "Ovo", "Hoefler Text", Georgia, "Times New Roman", "TIBch", "Source Han Sans", "PingFangSC-Regular", "Hiragino Sans GB", "STHeiti", "Microsoft Yahei", "Droid Sans Fallback", "WenQuanYi Micro Hei", sans-serif;
-    -moz-osx-font-smoothing: grayscale;
     transition: var(--theme-transition);
 }
 img{
