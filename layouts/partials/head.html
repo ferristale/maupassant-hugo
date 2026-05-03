@@ -1,43 +1,19 @@
 <head>
-    <!-- Prevent flash of incorrect theme by applying user preference immediately -->
     <script>
-        (function() {
-            // Block CSS media queries until we determine the theme
-            const style = document.createElement('style');
-            style.textContent = `
-                /* Block all prefers-color-scheme media queries until theme is determined */
-                @media (prefers-color-scheme: dark) {
-                    :root:not([data-theme]) {
-                        /* Prevent dark theme from being applied before we check user preference */
-                        color-scheme: light;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-            
+        {
             try {
                 const savedTheme = localStorage.getItem('theme');
-                const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                
-                // Determine which theme to apply
-                let themeToApply = 'light'; // default
-                if (savedTheme) {
-                    themeToApply = savedTheme;
-                } else if (systemPrefersDark) {
-                    themeToApply = 'dark';
-                }
-                
-                // Apply theme immediately
-                document.documentElement.setAttribute('data-theme', themeToApply);
-                
-                // Remove the blocking style after theme is applied
-                document.head.removeChild(style);
-            } catch (e) {
-                // Fallback to light theme if there are any errors
-                document.documentElement.setAttribute('data-theme', 'light');
-                document.head.removeChild(style);
+                const systemDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme === 'dark' || savedTheme === 'light'
+                    ? savedTheme
+                    : systemDark ? 'dark' : 'light';
+
+                document.documentElement.dataset.theme = theme;
+                document.documentElement.style.colorScheme = theme;
+            } catch {
+                document.documentElement.style.colorScheme = 'light';
             }
-        })();
+        }
     </script>
 
     <meta charset="utf-8">
@@ -104,7 +80,7 @@
     {{ end -}}
     
     {{ $themeJS := resources.Get "js/theme-switch.js" | minify }}
-    <script type="text/javascript" src="{{ $themeJS.RelPermalink }}"></script>
+    <script src="{{ $themeJS.RelPermalink }}"></script>
 
     {{ if .Site.Params.googleAd }}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ .Site.Params.googleAd }}" crossorigin="anonymous"></script>

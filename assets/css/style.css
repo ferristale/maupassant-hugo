@@ -43,24 +43,6 @@
     --theme-shadow: rgba(255, 255, 255, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):not([data-theme="dark"]) {
-        --theme-bg: #1d1d1d;
-        --theme-color: #ffffff;
-        --theme-border: #404040;
-        --theme-secondary-bg: #2a2a2a;
-        --theme-code-bg: #2d2d2d;
-        --theme-link-color: #bdc3c7;
-        --theme-link-hover: #5dade2;
-        --theme-link-hover-dark: #2980b9;
-        --theme-muted-color: #aaa;
-        --theme-header-border: #404040;
-        --theme-nav-current: #ffffff;
-        --theme-blockquote-color: #bbb;
-        --theme-shadow: rgba(255, 255, 255, 0.1);
-    }
-}
-
 @font-face {
     font-family: 'icomoon';
     src:url('/fonts/icomoon.woff') format('woff'),
@@ -188,12 +170,6 @@ blockquote::before{
     color: var(--theme-color);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):not([data-theme="dark"]) blockquote::before {
-        color: var(--theme-color);
-    }
-}
-  
 /**
 h1, h2, h3 {
     font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -393,15 +369,6 @@ textarea {
     color: var(--theme-link-hover-dark);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h2,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h3,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h4,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h5,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h6 {
-        color: var(--theme-link-hover);
-    }
-}
 .page-content{
     padding-top: 40px;
 }
@@ -1236,22 +1203,12 @@ table tbody tr td:nth-of-type(1) pre {
     color: var(--theme-color);
 }
 
-[data-theme="light"] .theme-toggle .icon-sun,
-:root:not([data-theme]) .theme-toggle .icon-sun {
+[data-theme="light"] .theme-toggle .icon-sun {
     display: block;
 }
 
 [data-theme="dark"] .theme-toggle .icon-moon {
     display: block;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .theme-toggle .icon-moon {
-        display: block;
-    }
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .theme-toggle .icon-sun {
-        display: none;
-    }
 }
   
 [data-theme="dark"] .post-title,
@@ -1266,29 +1223,7 @@ table tbody tr td:nth-of-type(1) pre {
 [data-theme="dark"] h6,
 [data-theme="dark"] .post-content,
 [data-theme="dark"] .page-navigator a {
-    color: #ffffff !important;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-title a,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .keyword,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) #logo,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) h1,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) h2,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) h3,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) h4,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) h5,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) h6,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .page-navigator a {
-        color: #ffffff !important;
-    }
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h2,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .post-content h3 {
-        color: var(--theme-link-hover) !important;
-        border-bottom-color: var(--theme-border);
-    }
+    color: var(--theme-color) !important;
 }
 
 /* Override specific heading styles in dark mode */
@@ -1448,19 +1383,4 @@ table tbody tr td:nth-of-type(1) pre {
 [data-theme="dark"] .index404:hover {
     background: #000;
     color: #fff;
-}
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .site-name404,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .title404 p,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .index404,
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .icon-about a {
-        color: #fff;
-    }
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .index404 {
-        background: #333;
-    }
-    :root:not([data-theme="light"]):not([data-theme="dark"]) .index404:hover {
-        background: #000;
-        color: #fff;
-    }
 }
