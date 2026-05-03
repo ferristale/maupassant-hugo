@@ -1,6 +1,7 @@
+{{ $posts := where (where .Site.RegularPages.ByDate.Reverse "Type" "in" (slice "post" "posts")) "Params.hiddenfromhomepage" "!=" true }}
 <h3 class="widget-title">{{ i18n "Articles_latest" }}</h3>
 <ul class="widget-list">
-    {{ range first 10 (where .Site.RegularPages.ByDate.Reverse "Type" "in" (slice "post" "posts")) }}
+    {{ range first 10 $posts }}
     <li>
         <a href="{{ .Permalink }}" title="{{ .Title }}" >{{ .Title }}</a>
     </li>

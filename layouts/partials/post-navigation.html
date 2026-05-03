@@ -1,5 +1,13 @@
 {{ $prev := .PrevInSection }}
 {{ $next := .NextInSection }}
+{{ range .CurrentSection.RegularPages }}
+    {{ if and $prev $prev.Params.hiddenfromhomepage }}
+        {{ $prev = $prev.PrevInSection }}
+    {{ end }}
+    {{ if and $next $next.Params.hiddenfromhomepage }}
+        {{ $next = $next.NextInSection }}
+    {{ end }}
+{{ end }}
 
 {{ if or $prev $next }}
 <div class="post-navigation">
