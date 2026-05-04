@@ -12,15 +12,18 @@ A simple Hugo template with great performance on different devices, ported from 
 
 ## Features
 
-- Responsive design for different devices
-- Local search
-- Thumbnail and preview
-- Table of contents
-- Admonition shortcodes
-- Code highlighting with copy button
-- LaTeX math support
-- Custom menus, links, and ads
-- Optimized font loading for better rendering performance
+- Local search (RSS + vanilla JS)
+- Recent posts (supports `hiddenfromhomepage` filtering)
+- Categories and tags
+- TOC with `<details>` rendering
+- Back-to-top rocket
+- SEO metadata with JSON-LD
+- Dark/light theme switch (system + localStorage)
+- Comments: Disqus / utterances / Waline (loaded on click)
+- GA4, sitemap, RSS, busuanzi
+- Fancybox v6 image zoom
+- MathJax loaded on demand
+- Custom menus, links, ads, CSS/JS, image CDN
 
 #### Requirements
 
@@ -43,7 +46,20 @@ theme = "maupassant"
 
 #### Quick Start
 
-See [exampleSite](exampleSite/) folder,  copy the`config.toml` in the root folder of your Hugo site and change it to your needs.
+This repo does not include `exampleSite`.
+Use your own Hugo site and set:
+
+```toml
+theme = "maupassant"
+```
+
+If you use pixi:
+
+```bash
+cd my-blog
+pixi add hugo
+pixi run hugo server -D
+```
 
 #### Menus
 
